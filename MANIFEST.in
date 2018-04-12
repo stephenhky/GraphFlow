@@ -1,0 +1,4 @@
+include README.md
+include graphflow/pagerank/f90pagerank.f90
+include graphflow/pagerank/f90pagerank.pyf
+

@@ -10,7 +10,7 @@ def readme():
 
 
 setup(name='graphflow',
-      version="0.1.0",
+      version="0.1.1",
       description="Algorithms for Graph Flow Analysis",
       long_description="Numerical routines for analyzing data represented by graphs",
       classifiers=[
