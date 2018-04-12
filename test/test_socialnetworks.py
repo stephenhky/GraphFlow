@@ -68,14 +68,14 @@ class test_SocialNetwork(unittest.TestCase):
             name1 = row['name1']
             name2 = row['name2']
             resistance = row['resistance']
-            self.assertAlmostEqual(wn1.getResistance(name1, name2), resistance, places=5)
+            self.assertAlmostEqual(wn1.getResistance(name1, name2), resistance, places=3)
             print('%s\t%s : %.4f passed.' % (name1, name2, resistance))
 
     def test_resistdist(self):
         obj = GraphResistanceDistance()
-        self.assertAlmostEqual(obj.getResistance('Stephen', 'Sinnie'), 0.6666666666666667, places=5)
-        self.assertAlmostEqual(obj.getResistance('Elaine', 'Sinnie'), 0.6666666666666667, places=5)
-        self.assertAlmostEqual(obj.getResistance('Elaine', 'Stephen'), 0.6666666666666667, places=5)
+        self.assertAlmostEqual(obj.getResistance('Stephen', 'Sinnie'), 0.6666666666666667, places=4)
+        self.assertAlmostEqual(obj.getResistance('Elaine', 'Sinnie'), 0.6666666666666667, places=4)
+        self.assertAlmostEqual(obj.getResistance('Elaine', 'Stephen'), 0.6666666666666667, places=4)
 
 if __name__ == '__main__':
     unittest.main()
