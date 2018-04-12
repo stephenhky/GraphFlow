@@ -4,7 +4,7 @@ import unittest
 
 import numpy as np
 import pandas as pd
-from mogu.netflow.simvoltage import SocialNetworkSimVoltage, GraphResistanceDistance
+from graphflow.simvoltage import SocialNetworkSimVoltage, GraphResistanceDistance
 
 class test_SocialNetwork(unittest.TestCase):
     def setUp(self):
