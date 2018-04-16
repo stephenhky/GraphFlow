@@ -15,20 +15,24 @@ def L1norm(r1, r2):
     return np.sum(abs(r1 - r2))
 
 
-def CalculatePageRank(digraph, beta, eps=1e-4, maxstep=1000, fortran=False):
-    A, nodes = GoogleMatrix(digraph, beta)
-
+def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=1000, fortran=True):
     if fortran:
-        r = fpr.compute_pagerank(A, eps, maxstep)
+        r = fpr.compute_pagerank(adjMatrix, eps, maxstep)
         nodepr = {node: r[nodes[node]] for node in nodes}
     else:
-        r = np.transpose(np.matrix(np.repeat(1 / float(len(digraph)), len(digraph))))
+        nbnodes = adjMatrix.shape[0]
+        r = np.transpose(np.matrix(np.repeat(1 / float(nbnodes), nbnodes)))
         converged = False
         stepid = 0
         while not converged and stepid < maxstep:
-            newr = A * r
+            newr = adjMatrix * r
             converged = (L1norm(newr, r) < eps)
             r = newr
             stepid += 1
         nodepr = {node: r[nodes[node], 0] for node in nodes}
     return nodepr
+
+
+def CalculatePageRank(digraph, beta, eps=1e-4, maxstep=1000, fortran=True):
+    A, nodes = GoogleMatrix(digraph, beta)
+    return CalculatePageRankFromAdjacencyMatrix(A, nodes, eps=eps, maxstep=maxstep, fortran=fortran)
