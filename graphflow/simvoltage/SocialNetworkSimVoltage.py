@@ -1,4 +1,6 @@
 
+from itertools import product
+
 import networkx as nx
 
 
@@ -12,13 +14,24 @@ default_edges = [('Stephen', 'Sinnie', 0.2),
 
 
 class SocialNetworkSimVoltage:
-    def __init__(self, nodes=default_nodes, edges=default_edges):
+    def __init__(self, nodes=default_nodes, edges=default_edges, precalculated_distance=True):
         self.initializeClass(nodes, edges)
+        self.precalculated_distance = precalculated_distance
+        if self.precalculated_distance:
+            self.precalculate_distance()
 
     def initializeClass(self, nodes, edges):
         self.constructSocialNetwork(nodes, edges)
         self.errTol = 1e-4
         self.maxSteps = 10000
+
+    def precalculate_distance(self):
+        self.distance_matrix = {}
+        for person1, person2 in product(self.wordNet.nodes(), self.wordNet.nodes()):
+            try:
+                self.distance_matrix[(person1, person2)] = float(nx.shortest_path_length(self.wordNet, person1, person2, weight='weight'))
+            except nx.exception.NetworkXNoPath:
+                self.distance_matrix[(person1, person2)] = float('inf')
 
     def constructSocialNetwork(self, nodes, edges):
         self.wordNet = nx.DiGraph()
@@ -47,8 +60,12 @@ class SocialNetworkSimVoltage:
             elif self.checkPersonIrrelevant(node, person1, person2):
                 volDict[node] = 10.0
                 continue
-            distFrom1 = float(nx.shortest_path_length(self.wordNet, person1, node, weight='weight'))
-            distFrom2 = float(nx.shortest_path_length(self.wordNet, node, person2, weight='weight'))
+            if self.precalculated_distance:
+                distFrom1 = self.distance_matrix[person1, node]
+                distFrom2 = self.distance_matrix[node, person2]
+            else:
+                distFrom1 = float(nx.shortest_path_length(self.wordNet, person1, node, weight='weight'))
+                distFrom2 = float(nx.shortest_path_length(self.wordNet, node, person2, weight='weight'))
             volDict[node] = distFrom2 / (distFrom1 + distFrom2)
         return volDict
 
@@ -88,10 +105,14 @@ class SocialNetworkSimVoltage:
     def getResistance(self, person1, person2, printVol = False):
         if person1 == person2:
             return 0.0
-        try:
-            distTwoWords = nx.shortest_path_length(self.wordNet, person1, person2, weight='weight')
-        except nx.exception.NetworkXNoPath:
-            return float('inf')
+        if self.precalculated_distance:
+            if self.distance_matrix[(person1, person2)] == float('inf'):
+                return float('inf')
+        else:
+            try:
+                distTwoWords = nx.shortest_path_length(self.wordNet, person1, person2, weight='weight')
+            except nx.exception.NetworkXNoPath:
+                return float('inf')
 
         # initialization
         volDict = self.initloop(person1, person2)
