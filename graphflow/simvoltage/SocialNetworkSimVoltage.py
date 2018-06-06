@@ -18,7 +18,7 @@ class SocialNetworkSimVoltage:
         self.initializeClass(nodes, edges)
         self.precalculated_distance = precalculated_distance
         if self.precalculated_distance:
-            self.precalculated_distance()
+            self.precalculate_distance()
 
     def initializeClass(self, nodes, edges):
         self.constructSocialNetwork(nodes, edges)
