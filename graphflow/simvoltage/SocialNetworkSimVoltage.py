@@ -29,7 +29,7 @@ class SocialNetworkSimVoltage:
         self.distance_matrix = {}
         for person1, person2 in product(self.wordNet.nodes(), self.wordNet.nodes()):
             try:
-                self.distance_matrix[(person1, person2)] = nx.shortest_path_length(self.wordNet, person1, person2, weight='weight')
+                self.distance_matrix[(person1, person2)] = float(nx.shortest_path_length(self.wordNet, person1, person2, weight='weight'))
             except nx.exception.NetworkXNoPath:
                 self.distance_matrix[(person1, person2)] = float('inf')
 

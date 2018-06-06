@@ -56,7 +56,7 @@ class test_SocialNetwork(unittest.TestCase):
                  ('Shirley', 'Wallace', 1),
                  ('Wallace', 'Shirley', 1),
                  ('Zoe', 'Wallace', 1)]
-        wn1 = SocialNetworkSimVoltage(nodes=nodes, edges=edges)
+        wn1 = SocialNetworkSimVoltage(nodes=nodes, edges=edges, precalculated_distance=False)
 
         THIS_DIR = os.path.dirname(os.path.abspath(__file__))
         testresults = pd.read_csv(os.path.join(THIS_DIR, 'socialnetworkranks.csv'),
