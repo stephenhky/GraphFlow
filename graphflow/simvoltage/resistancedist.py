@@ -19,12 +19,12 @@ class GraphResistanceDistance:
         self.Omega = self.computeResistanceDistance()
         
     def getResistance(self, node1, node2):
-        if self.nodesIdx.has_key(node1) and self.nodesIdx.has_key(node2):
+        if (node1 in self.nodesIdx) and (node2 in self.nodesIdx):
             idx0 = self.nodesIdx[node1]
             idx1 = self.nodesIdx[node2]
             return self.Omega[idx0, idx1]
         else:
-            unknown_keys = [node for node in [node1, node2] if not self.nodesIdx.has_key(node)]
+            unknown_keys = [node for node in [node1, node2] if not node in self.nodesIdx]
             raise Exception('Unknown key(s): '+' '.join(unknown_keys))
     
     def initializeClass(self, nodes, edges):
