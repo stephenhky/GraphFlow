@@ -6,6 +6,9 @@
 Welcome to GraphFlow's documentation!
 =====================================
 
+.. image:: https://travis-ci.org/stephenhky/GraphFlow.svg?branch=master
+   :target: https://travis-ci.org/stephenhky/GraphFlow
+
 Contents:
 
 .. toctree::
