@@ -1,6 +1,7 @@
 News
 ====
 
+* 07/19/2018: `graphflow` 0.1.5 released.
 * 06/27/2018: `graphflow` 0.1.4 released.
 * 06/14/2018: `graphflow` 0.1.3 released.
 * 06/06/2018: `graphflow` 0.1.2 released.
@@ -8,6 +9,12 @@ News
 
 What's New
 ----------
+
+Release 0.1.5 (Jul 19, 2018)
+----------------------------
+
+* Compatibility with Python 3.7.
+
 
 Release 0.1.4 (Jun 27, 2018)
 ----------------------------
