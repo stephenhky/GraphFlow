@@ -1,6 +1,7 @@
 News
 ====
 
+* 09/03/2018: `graphflow` 0.1.6 released.
 * 07/19/2018: `graphflow` 0.1.5 released.
 * 06/27/2018: `graphflow` 0.1.4 released.
 * 06/14/2018: `graphflow` 0.1.3 released.
@@ -9,6 +10,12 @@ News
 
 What's New
 ----------
+
+Release 0.1.6 (September 3, 2018)
+---------------------------------
+
+* Bug fixed;
+* New unit tests added.
 
 Release 0.1.5 (Jul 19, 2018)
 ----------------------------
