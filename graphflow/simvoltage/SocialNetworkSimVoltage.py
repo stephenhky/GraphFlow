@@ -39,12 +39,15 @@ class SocialNetworkSimVoltage:
         self.wordNet.add_weighted_edges_from(edges)
         
     def checkPersonIrrelevant(self, person, person1, person2):
-        path1 = nx.algorithms.shortest_path(self.wordNet,
-                                            source = person1, target = person,
-                                            weight='weight')
-        path2 = nx.algorithms.shortest_path(self.wordNet,
-                                            source = person, target = person2,
-                                            weight='weight')
+        try:
+            path1 = nx.algorithms.shortest_path(self.wordNet,
+                                                source = person1, target = person,
+                                                weight='weight')
+            path2 = nx.algorithms.shortest_path(self.wordNet,
+                                                source = person, target = person2,
+                                                weight='weight')
+        except nx.NetworkXNoPath:
+            return True
         intersection_paths = list(set(path1) & set(path2))
         return (len(intersection_paths) != 1)
 
