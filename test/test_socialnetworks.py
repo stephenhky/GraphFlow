@@ -77,5 +77,6 @@ class test_SocialNetwork(unittest.TestCase):
         self.assertAlmostEqual(obj.getResistance('Elaine', 'Sinnie'), 0.6666666666666667, places=4)
         self.assertAlmostEqual(obj.getResistance('Elaine', 'Stephen'), 0.6666666666666667, places=4)
 
+
 if __name__ == '__main__':
     unittest.main()
