@@ -24,4 +24,4 @@ def hits(adjMatrix, nodes, eps=1e-4, maxstep=1000):
         converged = (L1norm(newp, p) < eps) and (L1norm(newi, i) < eps)
         i, p = newi, newp
 
-    return i, p
+    return i.reshape(len(nodes)), p.reshape(len(nodes))
