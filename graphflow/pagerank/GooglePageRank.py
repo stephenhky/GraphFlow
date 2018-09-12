@@ -7,7 +7,7 @@ from graphflow import L1norm
 
 
 def GoogleMatrix(digraph, beta):
-    nodedict = {node: idx for idx, node in zip(range(len(digraph)), digraph.nodes())}
+    nodedict = {node: idx for idx, node in enumerate(digraph.nodes())}
     A = np.matrix((1 - beta) / float(len(digraph)) * np.ones(shape=(len(digraph), len(digraph))))
     for node1, node2 in digraph.edges():
         A[nodedict[node2], nodedict[node1]] += beta / float(len(list(digraph.successors(node1))))
