@@ -1,6 +1,7 @@
 News
 ====
 
+* 09/12/2018: `graphflow` 0.2.0 released.
 * 09/03/2018: `graphflow` 0.1.6 released.
 * 07/19/2018: `graphflow` 0.1.5 released.
 * 06/27/2018: `graphflow` 0.1.4 released.
@@ -10,6 +11,11 @@ News
 
 What's New
 ----------
+
+Release 0.2.0 (September 12, 2018)
+----------------------------------
+
+* Implementation of HITS (Hyperlink-Induced Topic Search) algorithm.
 
 Release 0.1.6 (September 3, 2018)
 ---------------------------------
