@@ -10,7 +10,7 @@ def readme():
 
 
 setup(name='graphflow',
-      version="0.1.7a0",
+      version="0.2.0a0",
       description="Algorithms for Graph Flow Analysis",
       long_description="Numerical routines for analyzing data represented by graphs",
       classifiers=[
@@ -31,6 +31,8 @@ setup(name='graphflow',
                 'graphflow.pagerank',
                 'graphflow.simvoltage',
                 'graphflow.matmul',],
+                'graphflow.simvoltage',
+                'graphflow.hits',],
       package_data={'graphflow': ['pagerank/*.f90', 'pagerank/*.pyf'],
                     'test': ['*.csv']},
       setup_requires=['numpy',],

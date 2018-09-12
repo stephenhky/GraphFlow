@@ -3,16 +3,15 @@ import numpy as np
 
 from f90pagerank import f90pagerank as fpr
 
+from graphflow import L1norm
+
+
 def GoogleMatrix(digraph, beta):
-    nodedict = {node: idx for idx, node in zip(range(len(digraph)), digraph.nodes())}
+    nodedict = {node: idx for idx, node in enumerate(digraph.nodes())}
     A = np.matrix((1 - beta) / float(len(digraph)) * np.ones(shape=(len(digraph), len(digraph))))
     for node1, node2 in digraph.edges():
         A[nodedict[node2], nodedict[node1]] += beta / float(len(list(digraph.successors(node1))))
     return A, nodedict
-
-
-def L1norm(r1, r2):
-    return np.sum(abs(r1 - r2))
 
 
 def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=1000, fortran=True):
