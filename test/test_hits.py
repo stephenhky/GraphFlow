@@ -18,17 +18,14 @@ class testHITS(unittest.TestCase):
         forkgr.add_nodes_from(['a', 'b', 'c'])
         forkgr.add_edges_from([('a', 'b'), ('c', 'b')])
 
-        A = nx.adj_matrix(forkgr).toarray()
-        nodesdict = {node: idx for idx, node in enumerate(forkgr.nodes)}
+        hubdict, authdict = graphflow.hits.CalculateHITS(forkgr)
 
-        i, p = graphflow.hits.hits(A, nodesdict)
-
-        self.assertAlmostEquals(i[nodesdict['a']], np.sqrt(0.5))
-        self.assertAlmostEquals(i[nodesdict['b']], 0.0)
-        self.assertAlmostEquals(i[nodesdict['c']], np.sqrt(0.5))
-        self.assertAlmostEquals(p[nodesdict['a']], 0.0)
-        self.assertAlmostEquals(p[nodesdict['b']], 1.0)
-        self.assertAlmostEquals(p[nodesdict['c']], 0.0)
+        self.assertAlmostEquals(hubdict['a'], np.sqrt(0.5))
+        self.assertAlmostEquals(hubdict['b'], 0.0)
+        self.assertAlmostEquals(hubdict['c'], np.sqrt(0.5))
+        self.assertAlmostEquals(authdict['a'], 0.0)
+        self.assertAlmostEquals(authdict['b'], 1.0)
+        self.assertAlmostEquals(authdict['c'], 0.0)
 
 
 if __name__ == '__main__':
