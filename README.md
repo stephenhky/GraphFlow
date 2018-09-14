@@ -7,6 +7,7 @@ This Python package provides numerical routines for graph flow analysis, particu
 * PageRank
 * Linear System of Resistance
 * Non-linear System of Resistance
+* HITS (Hyperlink-Induced Topic Search)
 
 # Installation
 
