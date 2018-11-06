@@ -9,10 +9,11 @@ python:
   - "3.7-dev"  # 3.7 development branch
 dist: xenial
 sudo: true
-# command to install dependencies
-install:
+before_install:
   - sudo apt-get install libc6
   - sudo apt-get install gfortran
+# command to install dependencies
+install:
   - pip install -U pandas
   - pip install -U .
 # command to run tests
