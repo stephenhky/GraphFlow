@@ -24,14 +24,20 @@ def GoogleMatrix(digraph, beta):
 
 
 def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=1000, fortran=True):
-    """
+    """ From the adjacency matrix, calculate the pagerank for each node.
 
-    :param adjMatrix:
-    :param nodes:
-    :param eps:
-    :param maxstep:
-    :param fortran:
-    :return:
+    :param adjMatrix: the adjacency matrix output from :func:`GoogleMatrix`.
+    :param nodes: a list of nodes
+    :param eps: tolerated error for convergence (default: 1e-4)
+    :param maxstep: maximum number of iterations (default: 1000)
+    :param fortran: use Fortran native code or not (default: True)
+    :return: a dictionary of pagerank scores for all the nodes
+    :type adjMatrix: numpy.ndarray
+    :type nodes: list
+    :type eps: float
+    :type maxstep: int
+    :type fortran: bool
+    :rtype: dict
     """
     if fortran:
         r = fpr.compute_pagerank(adjMatrix, eps, maxstep)
@@ -51,5 +57,20 @@ def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=100
 
 
 def CalculatePageRank(digraph, beta, eps=1e-4, maxstep=1000, fortran=True):
+    """ Given a directional graph, compute the pagerank for all the nodes.
+
+    :param digraph: directional graph in networkx
+    :param beta: probablility of leaking (between 0.0 and 1.0 (inclusive)
+    :param eps: tolerated error for convergence (default: 1e-4)
+    :param maxstep: maximum number of iterations (default: 1000)
+    :param fortran: use Fortran native code or not (default: True)
+    :return: a dictionary of pagerank scores for all the nodes
+    :type digraph: networkx.DiGraph
+    :type beta: float
+    :type eps: float
+    :type maxstep: int
+    :type fortran: bool
+    :rtype: dict
+    """
     A, nodes = GoogleMatrix(digraph, beta)
     return CalculatePageRankFromAdjacencyMatrix(A, nodes, eps=eps, maxstep=maxstep, fortran=fortran)
