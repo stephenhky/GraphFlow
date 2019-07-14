@@ -5,8 +5,17 @@ from f90pagerank import f90pagerank as fpr
 
 from graphflow import L1norm
 
-
 def GoogleMatrix(digraph, beta):
+    """ Convert the directional graph (networkx) to an adjacency matrix, and the corresponding
+    dictionary that maps the name of the nodes to an index.
+
+    :param digraph: directional graph in networkx
+    :param beta: probablility of leaking (between 0.0 and 1.0 (inclusive)
+    :return: adjacency matrix, dictionary
+    :type digraph: networkx.Digraph
+    :type beta: float
+    :rtype: tuple(numpy.ndarray, dict)
+    """
     nodedict = {node: idx for idx, node in enumerate(digraph.nodes())}
     A = np.matrix((1 - beta) / float(len(digraph)) * np.ones(shape=(len(digraph), len(digraph))))
     for node1, node2 in digraph.edges():
@@ -15,6 +24,15 @@ def GoogleMatrix(digraph, beta):
 
 
 def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=1000, fortran=True):
+    """
+
+    :param adjMatrix:
+    :param nodes:
+    :param eps:
+    :param maxstep:
+    :param fortran:
+    :return:
+    """
     if fortran:
         r = fpr.compute_pagerank(adjMatrix, eps, maxstep)
         nodepr = {node: r[nodes[node]] for node in nodes}
