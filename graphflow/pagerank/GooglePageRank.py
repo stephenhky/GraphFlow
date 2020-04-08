@@ -14,22 +14,31 @@ def GoogleMatrix(digraph, beta):
     return A, nodedict
 
 
+def CalculatePageRankFromAdjacencyMatrix_Fortran(adjMatrix, nodes, eps=1e-4, maxstep=1000):
+    r = fpr.compute_pagerank(adjMatrix, eps, maxstep)
+    nodepr = {node: r[nodes[node]] for node in nodes}
+    return nodepr
+
+
+def CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=1e-4, maxstep=1000):
+    nbnodes = adjMatrix.shape[0]
+    r = np.transpose([np.repeat(1 / float(nbnodes), nbnodes)])
+    converged = False
+    stepid = 0
+    while not converged and stepid < maxstep:
+        newr = np.matmul(adjMatrix, r)
+        converged = (L1norm(newr, r) < eps)
+        r = newr
+        stepid += 1
+    nodepr = {node: r[nodes[node], 0] for node in nodes}
+    return nodepr
+
+
 def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=1000, fortran=True):
     if fortran:
-        r = fpr.compute_pagerank(adjMatrix, eps, maxstep)
-        nodepr = {node: r[nodes[node]] for node in nodes}
+        return CalculatePageRankFromAdjacencyMatrix_Fortran(adjMatrix, nodes, eps=eps, maxstep=maxstep)
     else:
-        nbnodes = adjMatrix.shape[0]
-        r = np.transpose([np.repeat(1 / float(nbnodes), nbnodes)])
-        converged = False
-        stepid = 0
-        while not converged and stepid < maxstep:
-            newr = np.matmul(adjMatrix, r)
-            converged = (L1norm(newr, r) < eps)
-            r = newr
-            stepid += 1
-        nodepr = {node: r[nodes[node], 0] for node in nodes}
-    return nodepr
+        return CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=eps, maxstep=maxstep)
 
 
 def CalculatePageRank(digraph, beta, eps=1e-4, maxstep=1000, fortran=True):
