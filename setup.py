@@ -4,8 +4,12 @@ from setuptools import setup
 
 from numpy.distutils.core import setup, Extension
 
-from Cython.Build import cythonize
-dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
+try:
+    from Cython.Build import cythonize
+    dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
+except ImportError:
+    dynprog_ext_modules = [Extension('mogu.pagerank.cpagerank', ['graphflow/pagerank/cpagerank.c']),]
+
 
 
 def readme():

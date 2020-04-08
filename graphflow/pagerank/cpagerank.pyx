@@ -1,5 +1,5 @@
 
-from libcpp cimport bool
+from cpython cimport bool
 import numpy as np
 cimport numpy as np
 
@@ -13,7 +13,7 @@ def pagerank_cython(np.ndarray adjMatrix, dict nodes, float eps, int maxstep):
 
     while not converged and stepid < maxstep:
         newr = np.matmul(adjMatrix, r)
-        converged = np.sum(np.abs(newr - r)) < eps
+        converged = bool(np.sum(np.abs(newr - r)) < eps)
         r = newr
         stepid += 1
 
