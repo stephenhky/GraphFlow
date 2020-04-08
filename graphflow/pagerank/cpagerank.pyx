@@ -1,4 +1,5 @@
 
+from libcpp cimport bool
 import numpy as np
 cimport numpy as np
 
