@@ -8,7 +8,7 @@ from graphflow import L1norm
 
 def GoogleMatrix(digraph, beta):
     nodedict = {node: idx for idx, node in enumerate(digraph.nodes())}
-    A = np.matrix((1 - beta) / float(len(digraph)) * np.ones(shape=(len(digraph), len(digraph))))
+    A = (1 - beta) / float(len(digraph)) * np.ones(shape=(len(digraph), len(digraph)))
     for node1, node2 in digraph.edges():
         A[nodedict[node2], nodedict[node1]] += beta / float(len(list(digraph.successors(node1))))
     return A, nodedict
@@ -20,11 +20,11 @@ def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=100
         nodepr = {node: r[nodes[node]] for node in nodes}
     else:
         nbnodes = adjMatrix.shape[0]
-        r = np.transpose(np.matrix(np.repeat(1 / float(nbnodes), nbnodes)))
+        r = np.transpose([np.repeat(1 / float(nbnodes), nbnodes)])
         converged = False
         stepid = 0
         while not converged and stepid < maxstep:
-            newr = adjMatrix * r
+            newr = np.matmul(adjMatrix, r)
             converged = (L1norm(newr, r) < eps)
             r = newr
             stepid += 1
