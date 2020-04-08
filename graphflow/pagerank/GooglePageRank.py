@@ -1,9 +1,19 @@
+
+import enum
+import warnings
+
 import numpy as np
 #import networkx as nx
 
 from f90pagerank import f90pagerank as fpr
-
+from .cpagerank import pagerank_cython
 from graphflow import L1norm
+
+
+class PageRankLanguage(enum.Enum):
+    PYTHON = 0
+    CYTHON = 1
+    FORTRAN = 2
 
 
 def GoogleMatrix(digraph, beta):
@@ -20,6 +30,10 @@ def CalculatePageRankFromAdjacencyMatrix_Fortran(adjMatrix, nodes, eps=1e-4, max
     return nodepr
 
 
+def CalculatePageRankFromAdjacencyMatrix_Cython(adjMatrix, nodes, eps=1e-4, maxstep=1000):
+    return pagerank_cython(adjMatrix, nodes, eps, maxstep)
+
+
 def CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=1e-4, maxstep=1000):
     nbnodes = adjMatrix.shape[0]
     r = np.transpose([np.repeat(1 / float(nbnodes), nbnodes)])
@@ -34,9 +48,15 @@ def CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=1e-4, maxs
     return nodepr
 
 
-def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=1000, fortran=True):
-    if fortran:
+def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=1000,
+                                         language=PageRankLanguage.FORTRAN,
+                                         fortran=True):
+    if not fortran:
+        warnings.warn('The boolean variable "fortran" is deprecated.')
+    if language == PageRankLanguage.FORTRAN:
         return CalculatePageRankFromAdjacencyMatrix_Fortran(adjMatrix, nodes, eps=eps, maxstep=maxstep)
+    elif language == PageRankLanguage.CYTHON:
+        return CalculatePageRankFromAdjacencyMatrix_Cython(adjMatrix, nodes, eps=eps, maxstep=maxstep)
     else:
         return CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=eps, maxstep=maxstep)
 

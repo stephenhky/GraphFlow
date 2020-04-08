@@ -4,13 +4,17 @@ from setuptools import setup
 
 from numpy.distutils.core import setup, Extension
 
+from Cython.Build import cythonize
+dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
+
+
 def readme():
     with open('README.md') as f:
         return f.read()
 
 
 setup(name='graphflow',
-      version="0.2.1",
+      version="0.2.2a01",
       description="Algorithms for Graph Flow Analysis",
       long_description="Numerical routines for analyzing data represented by graphs",
       classifiers=[
@@ -43,7 +47,7 @@ setup(name='graphflow',
       ],
       ext_modules = [Extension( 'f90pagerank', sources=['graphflow/pagerank/f90pagerank.f90',
                                                         'graphflow/pagerank/f90pagerank.pyf']),
-                     ],
+                     ] + dynprog_ext_modules,
       include_package_data=True,
       test_suite="test",
       zip_safe=False)
