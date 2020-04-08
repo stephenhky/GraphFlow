@@ -19,6 +19,7 @@ before_install:
 # command to install dependencies
 install:
   - pip install -U pandas
+  - pip install Cython
   - pip install -U .
 # command to run tests
 script:

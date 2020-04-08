@@ -40,7 +40,7 @@ setup(name='graphflow',
                     'test': ['*.csv']},
       setup_requires=['numpy',],
       install_requires=[
-          'numpy', 'scipy', 'networkx>=2.0',
+          'Cython', 'numpy', 'scipy', 'networkx>=2.0',
       ],
       tests_require=[
           'unittest2', 'pandas',
