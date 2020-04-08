@@ -10,7 +10,7 @@ def readme():
 
 
 setup(name='graphflow',
-      version="0.2.0",
+      version="0.2.1",
       description="Algorithms for Graph Flow Analysis",
       long_description="Numerical routines for analyzing data represented by graphs",
       classifiers=[
@@ -19,6 +19,7 @@ setup(name='graphflow',
           "Programming Language :: Python :: 3.5",
           "Programming Language :: Python :: 3.6",
           "Programming Language :: Python :: 3.7",
+          "Programming Language :: Python :: 3.8",
           "Programming Language :: Fortran",
           "License :: OSI Approved :: MIT License",
       ],
