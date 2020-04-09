@@ -8,18 +8,17 @@ python:
   - "3.7"
   - "3.7-dev"  # 3.7 development branch
   - "3.8"
-  - "3.8-dev"
+  - "3.8-dev"  # 3.8 development branch
 dist: xenial
 sudo: true
 before_install:
   - sudo apt-get install libc6
   - sudo apt-get install gfortran
-  - sudo apt-get install python-dev
-  - sudo apt-get install python3-dev
 # command to install dependencies
 install:
+  - pip install -U numpy
   - pip install -U pandas
   - pip install -U .
 # command to run tests
 script:
-  - pytest # or py.test for Python versions 3.5 and below
+  - python setup.py test # or py.test for Python versions 3.5 and below

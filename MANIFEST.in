@@ -1,4 +1,6 @@
 include README.md
 include graphflow/pagerank/f90pagerank.f90
 include graphflow/pagerank/f90pagerank.pyf
+include graphflow/pagerank/cpagerank.pyx
+include graphflow/pagerank/cpagerank.c
 

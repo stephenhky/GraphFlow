@@ -1,35 +1,64 @@
+
+import enum
+import warnings
+
 import numpy as np
 #import networkx as nx
 
 from f90pagerank import f90pagerank as fpr
-
+from . import pagerank_cython
 from graphflow import L1norm
+
+
+class PageRankLanguage(enum.Enum):
+    PYTHON = 0
+    CYTHON = 1
+    FORTRAN = 2
 
 
 def GoogleMatrix(digraph, beta):
     nodedict = {node: idx for idx, node in enumerate(digraph.nodes())}
-    A = np.matrix((1 - beta) / float(len(digraph)) * np.ones(shape=(len(digraph), len(digraph))))
+    A = (1 - beta) / float(len(digraph)) * np.ones(shape=(len(digraph), len(digraph)))
     for node1, node2 in digraph.edges():
         A[nodedict[node2], nodedict[node1]] += beta / float(len(list(digraph.successors(node1))))
     return A, nodedict
 
 
-def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=1000, fortran=True):
-    if fortran:
-        r = fpr.compute_pagerank(adjMatrix, eps, maxstep)
-        nodepr = {node: r[nodes[node]] for node in nodes}
-    else:
-        nbnodes = adjMatrix.shape[0]
-        r = np.transpose(np.matrix(np.repeat(1 / float(nbnodes), nbnodes)))
-        converged = False
-        stepid = 0
-        while not converged and stepid < maxstep:
-            newr = adjMatrix * r
-            converged = (L1norm(newr, r) < eps)
-            r = newr
-            stepid += 1
-        nodepr = {node: r[nodes[node], 0] for node in nodes}
+def CalculatePageRankFromAdjacencyMatrix_Fortran(adjMatrix, nodes, eps=1e-4, maxstep=1000):
+    r = fpr.compute_pagerank(adjMatrix, eps, maxstep)
+    nodepr = {node: r[nodes[node]] for node in nodes}
     return nodepr
+
+
+def CalculatePageRankFromAdjacencyMatrix_Cython(adjMatrix, nodes, eps=1e-4, maxstep=1000):
+    return pagerank_cython(adjMatrix, nodes, eps, maxstep)
+
+
+def CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=1e-4, maxstep=1000):
+    nbnodes = adjMatrix.shape[0]
+    r = np.transpose([np.repeat(1 / float(nbnodes), nbnodes)])
+    converged = False
+    stepid = 0
+    while not converged and stepid < maxstep:
+        newr = np.matmul(adjMatrix, r)
+        converged = (L1norm(newr, r) < eps)
+        r = newr
+        stepid += 1
+    nodepr = {node: r[nodes[node], 0] for node in nodes}
+    return nodepr
+
+
+def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=1000,
+                                         language=PageRankLanguage.FORTRAN,
+                                         fortran=True):
+    if not fortran:
+        warnings.warn('The boolean variable "fortran" is deprecated.')
+    if language == PageRankLanguage.FORTRAN:
+        return CalculatePageRankFromAdjacencyMatrix_Fortran(adjMatrix, nodes, eps=eps, maxstep=maxstep)
+    elif language == PageRankLanguage.CYTHON:
+        return CalculatePageRankFromAdjacencyMatrix_Cython(adjMatrix, nodes, eps=eps, maxstep=maxstep)
+    else:
+        return CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=eps, maxstep=maxstep)
 
 
 def CalculatePageRank(digraph, beta, eps=1e-4, maxstep=1000, fortran=True):
