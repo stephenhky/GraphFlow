@@ -14,8 +14,6 @@ sudo: true
 before_install:
   - sudo apt-get install libc6
   - sudo apt-get install gfortran
-  - sudo apt-get install python-dev
-  - sudo apt-get install python3-dev
 # command to install dependencies
 install:
   - pip install -U numpy
