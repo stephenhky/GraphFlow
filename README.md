@@ -22,6 +22,7 @@ After ensuring they have been installed, type the following to install `graphflo
 
 # News
 
+* 04/09/2020: `graphflow` 0.3.0 released.
 * 04/07/2020: `graphflow` 0.2.1 released.
 * 09/12/2018: `graphflow` 0.2.0 released.
 * 09/03/2018: `graphflow` 0.1.6 released.

@@ -19,17 +19,20 @@ def readme():
 
 
 setup(name='graphflow',
-      version="0.2.2a01",
+      version="0.3.0",
       description="Algorithms for Graph Flow Analysis",
       long_description="Numerical routines for analyzing data represented by graphs",
       classifiers=[
+          "Topic :: Scientific/Engineering :: Artificial Intelligence",
           "Topic :: Scientific/Engineering :: Mathematics",
-          "Programming Language :: Python :: 2.7",
+          "Topic :: Software Development :: Libraries :: Python Modules",
           "Programming Language :: Python :: 3.5",
           "Programming Language :: Python :: 3.6",
           "Programming Language :: Python :: 3.7",
           "Programming Language :: Python :: 3.8",
           "Programming Language :: Fortran",
+          "Programming Language :: Cython",
+          "Programming Language :: C",
           "License :: OSI Approved :: MIT License",
       ],
       keywords="Algorithms for Graph Flow Analysis",
