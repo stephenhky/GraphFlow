@@ -2,6 +2,7 @@
 # must import thisfirst. Ref: # must import this. Ref: https://stackoverflow.com/questions/7932028/setup-py-for-packages-that-depend-on-both-cython-and-f2py?rq=1
 from setuptools import setup
 
+import numpy as np
 from numpy.distutils.core import setup, Extension
 
 try:
@@ -40,15 +41,17 @@ setup(name='graphflow',
                 'graphflow.pagerank',
                 'graphflow.simvoltage',
                 'graphflow.hits',],
-      package_data={'graphflow': ['pagerank/*.f90', 'pagerank/*.pyf'],
+      package_data={'graphflow': ['pagerank/*.f90', 'pagerank/*.pyf',
+                                  'pagerank/*.c', 'pagerank/*.pyx'],
                     'test': ['*.csv']},
-      setup_requires=['numpy',],
+      setup_requires=['numpy', 'Cython'],
       install_requires=[
           'Cython', 'numpy', 'scipy', 'networkx>=2.0',
       ],
       tests_require=[
           'unittest2', 'pandas',
       ],
+      include_dirs=[np.get_include()],
       ext_modules = [Extension( 'f90pagerank', sources=['graphflow/pagerank/f90pagerank.f90',
                                                         'graphflow/pagerank/f90pagerank.pyf']),
                      ] + dynprog_ext_modules,
