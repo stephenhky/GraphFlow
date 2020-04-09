@@ -14,8 +14,8 @@ sudo: true
 before_install:
   - sudo apt-get install libc6
   - sudo apt-get install gfortran
-#  - sudo apt-get install python-dev
-#  - sudo apt-get install python3-dev
+  - sudo apt-get install python-dev
+  - sudo apt-get install python3-dev
 # command to install dependencies
 install:
   - pip install -U numpy
@@ -23,4 +23,4 @@ install:
   - pip install -U .
 # command to run tests
 script:
-  - pytest # or py.test for Python versions 3.5 and below
+  - python setup.py test # or py.test for Python versions 3.5 and below
