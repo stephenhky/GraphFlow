@@ -6,7 +6,7 @@ import numpy as np
 #import networkx as nx
 
 from f90pagerank import f90pagerank as fpr
-from .cpagerank import pagerank_cython
+from . import pagerank_cython
 from graphflow import L1norm
 
 
