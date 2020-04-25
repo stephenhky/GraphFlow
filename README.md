@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/stephenhky/GraphFlow.svg?branch=master)](https://travis-ci.org/stephenhky/GraphFlow)
 [![GitHub release](https://img.shields.io/github/release/stephenhky/GraphFlow.svg?maxAge=3600)](https://github.com/stephenhky/GraphFlow/releases)
 [![Documentation Status](https://readthedocs.org/projects/graphflow/badge/?version=latest)](https://graphflow.readthedocs.io/en/latest/?badge=latest)
+[![Updates](https://pyup.io/repos/github/stephenhky/pyqentangle/shield.svg)](https://pyup.io/repos/github/stephenhky/pyqentangle/)
+[![Python 3](https://pyup.io/repos/github/stephenhky/pyqentangle/python-3-shield.svg)](https://pyup.io/repos/github/stephenhky/pyqentangle/)
 
 This Python package provides numerical routines for graph flow analysis, particularly:
 
