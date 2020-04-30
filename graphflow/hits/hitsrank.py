@@ -7,6 +7,13 @@ from graphflow import L1norm
 
 
 def hits(adjMatrix, eps=1e-4, maxstep=1000):
+    """
+
+    :param adjMatrix:
+    :param eps:
+    :param maxstep:
+    :return:
+    """
     nbnodes = adjMatrix.shape[0]
     # hub vector
     i = np.random.uniform(size=nbnodes).reshape((nbnodes, 1))
@@ -30,6 +37,13 @@ def hits(adjMatrix, eps=1e-4, maxstep=1000):
 
 
 def CalculateHITS(digraph, eps=1e-4, maxstep=1000):
+    """
+
+    :param digraph:
+    :param eps:
+    :param maxstep:
+    :return:
+    """
     A = nx.adj_matrix(digraph).toarray()
     nodes = list(digraph.nodes())
     hubvec, authvec = hits(A, eps=eps, maxstep=maxstep)

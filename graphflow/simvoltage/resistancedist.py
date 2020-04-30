@@ -14,11 +14,25 @@ default_edges = [('Stephen', 'Sinnie'),
                  ('Elaine', 'Stephen')]
 
 class GraphResistanceDistance:
+    """
+
+    """
     def __init__(self, nodes=default_nodes, edges=default_edges):
+        """
+
+        :param nodes:
+        :param edges:
+        """
         self.initializeClass(nodes, edges)
         self.Omega = self.computeResistanceDistance()
         
     def getResistance(self, node1, node2):
+        """
+
+        :param node1:
+        :param node2:
+        :return:
+        """
         if (node1 in self.nodesIdx) and (node2 in self.nodesIdx):
             idx0 = self.nodesIdx[node1]
             idx1 = self.nodesIdx[node2]
@@ -28,12 +42,22 @@ class GraphResistanceDistance:
             raise Exception('Unknown key(s): '+' '.join(unknown_keys))
     
     def initializeClass(self, nodes, edges):
+        """
+
+        :param nodes:
+        :param edges:
+        :return:
+        """
         self.nodes = nodes
         # all edges are unique
         self.edges = list(set([tuple(sorted(edge)) for edge in edges]))
         self.nodesIdx = {self.nodes[idx]: idx for idx in range(len(self.nodes))}
 
     def calculateDegreeMatrix(self):
+        """
+
+        :return:
+        """
         Dmatrix = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float)
         for edge in self.edges:
             for node in edge:
@@ -42,6 +66,10 @@ class GraphResistanceDistance:
         return Dmatrix
         
     def calculateAdjacencyMatrix(self):
+        """
+
+        :return:
+        """
         Amatrix = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float)
         for edge in self.edges:
             idx0 = self.nodesIdx[edge[0]]
@@ -51,6 +79,10 @@ class GraphResistanceDistance:
         return Amatrix
         
     def computeResistanceDistance(self):
+        """
+
+        :return:
+        """
         Dmatrix = self.calculateDegreeMatrix()
         Amatrix = self.calculateAdjacencyMatrix()
         Lmatrix = Dmatrix.toarray() - Amatrix.toarray()

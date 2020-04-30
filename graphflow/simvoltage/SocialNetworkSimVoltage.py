@@ -14,18 +14,37 @@ default_edges = [('Stephen', 'Sinnie', 0.2),
 
 
 class SocialNetworkSimVoltage:
+    """
+
+    """
     def __init__(self, nodes=default_nodes, edges=default_edges, precalculated_distance=True):
+        """
+
+        :param nodes:
+        :param edges:
+        :param precalculated_distance:
+        """
         self.initializeClass(nodes, edges)
         self.precalculated_distance = precalculated_distance
         if self.precalculated_distance:
             self.precalculate_distance()
 
     def initializeClass(self, nodes, edges):
+        """
+
+        :param nodes:
+        :param edges:
+        :return:
+        """
         self.constructSocialNetwork(nodes, edges)
         self.errTol = 1e-4
         self.maxSteps = 10000
 
     def precalculate_distance(self):
+        """
+
+        :return:
+        """
         self.distance_matrix = {}
         for person1, person2 in product(self.wordNet.nodes(), self.wordNet.nodes()):
             try:
@@ -34,11 +53,24 @@ class SocialNetworkSimVoltage:
                 self.distance_matrix[(person1, person2)] = float('inf')
 
     def constructSocialNetwork(self, nodes, edges):
+        """
+
+        :param nodes:
+        :param edges:
+        :return:
+        """
         self.wordNet = nx.DiGraph()
         self.wordNet.add_nodes_from(nodes)
         self.wordNet.add_weighted_edges_from(edges)
         
     def checkPersonIrrelevant(self, person, person1, person2):
+        """
+
+        :param person:
+        :param person1:
+        :param person2:
+        :return:
+        """
         try:
             path1 = nx.algorithms.shortest_path(self.wordNet,
                                                 source = person1, target = person,
@@ -52,6 +84,12 @@ class SocialNetworkSimVoltage:
         return (len(intersection_paths) != 1)
 
     def initloop(self, person1, person2):
+        """
+
+        :param person1:
+        :param person2:
+        :return:
+        """
         volDict = {}
         for node in self.wordNet:
             if node == person1:
@@ -73,6 +111,12 @@ class SocialNetworkSimVoltage:
         return volDict
 
     def compute_incurrent(self, node, volDict):
+        """
+
+        :param node:
+        :param volDict:
+        :return:
+        """
         in_current = 0
         for pred in self.wordNet.predecessors(node):
             if (volDict[pred] > volDict[node]) and (volDict[pred] >= 0.0) and (volDict[pred] <= 1.0):
@@ -82,6 +126,12 @@ class SocialNetworkSimVoltage:
         return in_current
 
     def compute_outcurrent(self, node, volDict):
+        """
+
+        :param node:
+        :param volDict:
+        :return:
+        """
         out_current = 0
         for succ in self.wordNet.successors(node):
             if (volDict[node] > volDict[succ]) and (volDict[succ] >= 0.0) and (volDict[succ] <= 1.0):
@@ -91,6 +141,12 @@ class SocialNetworkSimVoltage:
         return out_current
 
     def average_VR(self, node, volDict):
+        """
+
+        :param node:
+        :param volDict:
+        :return:
+        """
         sumVOverR = 0.0
         numRecR = 0.0
         for pred in self.wordNet.predecessors(node):
@@ -106,6 +162,13 @@ class SocialNetworkSimVoltage:
         return sumVOverR, numRecR
 
     def getResistance(self, person1, person2, printVol = False):
+        """
+
+        :param person1:
+        :param person2:
+        :param printVol:
+        :return:
+        """
         if person1 == person2:
             return 0.0
         if self.precalculated_distance:
@@ -160,6 +223,10 @@ class SocialNetworkSimVoltage:
         return (1.0 / startCurrent)
                                 
     def drawNetwork(self):
+        """
+
+        :return:
+        """
         nx.draw(self.wordNet)
         
 
