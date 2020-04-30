@@ -7,3 +7,4 @@ def L1norm(r1, r2):
 from . import simvoltage
 from . import pagerank
 from . import hits
+from .pagerank.GooglePageRank import PageRankLanguage

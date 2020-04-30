@@ -1,6 +1,8 @@
 News
 ====
 
+* 04/09/2020: `graphflow` 0.3.0 released.
+* 04/07/2020: `graphflow` 0.2.1 released.
 * 09/12/2018: `graphflow` 0.2.0 released.
 * 09/03/2018: `graphflow` 0.1.6 released.
 * 07/19/2018: `graphflow` 0.1.5 released.
@@ -11,6 +13,18 @@ News
 
 What's New
 ----------
+
+Release 0.3.0 (April 9, 2020)
+-----------------------------
+
+* Support for Python 3.8;
+* Decommissioning support for Python 2.7;
+* Cython/C support for PageRank, with function arguments changed.
+
+Release 0.2.1 (April 7, 2020)
+-----------------------------
+
+* Support for Python 3.8.
 
 Release 0.2.0 (September 12, 2018)
 ----------------------------------
