@@ -7,14 +7,10 @@ shared: &shared
     - checkout
 
     - run:
-        name: Apt Installing
+        name: Installing Packages
         command: |
           sudo apt-get install libc6
           sudo apt-get install gfortran
-
-    - run:
-        name: Installing Packages
-        command: |
           pip install --upgrade --user pip
           pip install --upgrade --user numpy
           pip install --upgrade --user pandas

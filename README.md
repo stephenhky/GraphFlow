@@ -1,6 +1,6 @@
 # graphflow : Algorithms for Graph Flow Analysis
 
-[![Build Status](https://travis-ci.org/stephenhky/GraphFlow.svg?branch=master)](https://travis-ci.org/stephenhky/GraphFlow)
+[![CircleCI](https://circleci.com/gh/stephenhky/GraphFlow.svg?style=svg)](https://circleci.com/gh/stephenhky/GraphFlow.svg)
 [![GitHub release](https://img.shields.io/github/release/stephenhky/GraphFlow.svg?maxAge=3600)](https://github.com/stephenhky/GraphFlow/releases)
 [![Documentation Status](https://readthedocs.org/projects/graphflow/badge/?version=latest)](https://graphflow.readthedocs.io/en/latest/?badge=latest)
 [![Updates](https://pyup.io/repos/github/stephenhky/GraphFlow/shield.svg)](https://pyup.io/repos/github/stephenhky/GraphFlow/)
