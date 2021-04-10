@@ -9,6 +9,7 @@ shared: &shared
     - run:
         name: Apt Install
         command: |
+          sudo apt-get update
           sudo apt-get install libc6
           sudo apt-get install gfortran
 
@@ -18,6 +19,7 @@ shared: &shared
           pip install --upgrade --user pip
           pip install --upgrade --user numpy
           pip install --upgrade --user pandas
+          pip install --upgrade --user Cython
           pip install --upgrade --user .
           pip install --upgrade --user unittest2
           pip install --upgrade --user pytest
