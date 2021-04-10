@@ -1,18 +1,10 @@
-
-import enum
 import warnings
 
 import numpy as np
 
 from f90pagerank import f90pagerank as fpr
 from .cpagerank import pagerank_cython
-from .. import L1norm
-
-
-class PageRankLanguage(enum.Enum):
-    PYTHON = 0
-    CYTHON = 1
-    FORTRAN = 2
+from .. import L1norm, PageRankLanguage
 
 
 def GoogleMatrix(digraph, beta):
