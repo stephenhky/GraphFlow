@@ -1,4 +1,4 @@
 
-from .cpagerank import pagerank_cython
+from . import cpagerank
 
 from .GooglePageRank import GoogleMatrix, CalculatePageRankFromAdjacencyMatrix, CalculatePageRank

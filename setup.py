@@ -10,7 +10,7 @@ try:
     from Cython.Build import cythonize
     dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
 except ImportError:
-    dynprog_ext_modules = [Extension('cpagerank',
+    dynprog_ext_modules = [Extension('graphflow.pagerank.cpagerank',
                                      sources=['graphflow/pagerank/cpagerank.c'])]
 
 
