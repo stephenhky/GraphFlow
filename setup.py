@@ -2,7 +2,7 @@
 # must import thisfirst. Ref: # must import this. Ref: https://stackoverflow.com/questions/7932028/setup-py-for-packages-that-depend-on-both-cython-and-f2py?rq=1
 from setuptools import setup, Extension
 import numpy as np
-# from numpy.distutils.core import setup
+from numpy.distutils.core import setup
 from numpy.distutils.core import Extension as fortranExtension
 
 
@@ -10,7 +10,7 @@ try:
     from Cython.Build import cythonize
     dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
 except ImportError:
-    dynprog_ext_modules = [Extension('graphflow.pagerank.cpagerank',
+    dynprog_ext_modules = [Extension('cpagerank',
                                      sources=['graphflow/pagerank/cpagerank.c'])]
 
 
