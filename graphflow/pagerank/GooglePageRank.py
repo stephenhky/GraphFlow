@@ -6,7 +6,7 @@ import numpy as np
 
 from f90pagerank import f90pagerank as fpr
 from .cpagerank import pagerank_cython
-from graphflow import L1norm
+from .. import L1norm
 
 
 class PageRankLanguage(enum.Enum):
