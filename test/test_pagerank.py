@@ -3,6 +3,7 @@ import unittest
 
 import networkx as nx
 import graphflow
+import graphflow.pagerank
 from graphflow import PageRankLanguage
 
 nodes = ['Stephen', 'John', 'Mary',
