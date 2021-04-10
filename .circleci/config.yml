@@ -1,7 +1,7 @@
 version: 2
 
 shared: &shared
-  working_directory: ~/finsim
+  working_directory: ~/graphflow
 
   steps:
     - checkout
