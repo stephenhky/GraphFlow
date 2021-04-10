@@ -2,6 +2,8 @@
 # must import thisfirst. Ref: # must import this. Ref: https://stackoverflow.com/questions/7932028/setup-py-for-packages-that-depend-on-both-cython-and-f2py?rq=1
 from setuptools import setup, Extension
 import numpy as np
+from numpy.distutils.core import setup
+from numpy.distutils.core import Extension as fortranExtension
 
 
 try:
@@ -54,9 +56,10 @@ setup(name='graphflow',
           'unittest2', 'pandas',
       ],
       include_dirs=[np.get_include()],
-      ext_modules = [Extension( 'f90pagerank', sources=['graphflow/pagerank/f90pagerank.f90',
-                                                        'graphflow/pagerank/f90pagerank.pyf']),
-                     ] + dynprog_ext_modules,
+      ext_modules=[fortranExtension('f90pagerank',
+                                    sources=['graphflow/pagerank/f90pagerank.f90',
+                                             'graphflow/pagerank/f90pagerank.pyf']),
+                  ] + dynprog_ext_modules,
       include_package_data=True,
       test_suite="test",
       zip_safe=False)
