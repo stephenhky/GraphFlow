@@ -20,6 +20,10 @@ def readme():
         return f.read()
 
 
+def install_requirements():
+    return [package_string.strip() for package_string in open('requirements.txt', 'r')]
+
+
 setup(name='graphflow',
       version="0.3.1a1",
       description="Algorithms for Graph Flow Analysis",
@@ -50,9 +54,7 @@ setup(name='graphflow',
                                   'pagerank/*.c', 'pagerank/*.pyx'],
                     'test': ['*.csv']},
       setup_requires=['numpy', 'Cython'],
-      install_requires=[
-          'Cython', 'numpy', 'scipy', 'networkx>=2.0',
-      ],
+      install_requires=install_requirements(),
       tests_require=[
           'unittest2', 'pandas',
       ],
