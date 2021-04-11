@@ -11,3 +11,7 @@ class PageRankLanguage(enum.Enum):
     PYTHON = 0
     CYTHON = 1
     FORTRAN = 2
+
+from . import hits
+from . import pagerank
+from . import simvoltage
