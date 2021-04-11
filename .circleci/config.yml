@@ -61,8 +61,8 @@ workflows:
   version: 2
   build:
     jobs:
-      - py35
-      - py36
-      - py37
+#      - py35
+#      - py36
+#      - py37
       - py38
-      - py39
+#      - py39

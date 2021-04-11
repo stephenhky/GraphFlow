@@ -1,6 +1,6 @@
 
 # must import thisfirst. Ref: # must import this. Ref: https://stackoverflow.com/questions/7932028/setup-py-for-packages-that-depend-on-both-cython-and-f2py?rq=1
-from setuptools import setup, Extension
+from setuptools import setup
 import numpy as np
 from numpy.distutils.core import setup
 from numpy.distutils.core import Extension as fortranExtension
@@ -8,11 +8,18 @@ from numpy.distutils.core import Extension as fortranExtension
 
 try:
     from Cython.Build import cythonize
+    print('Cython')
     dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
 except ImportError:
+    from setuptools import Extension
+    print('C++')
     dynprog_ext_modules = [Extension('graphflow.pagerank.cpagerank',
                                      sources=['graphflow/pagerank/cpagerank.c'])]
 
+print('Fortran extension')
+fortran_ext_modules = fortranExtension('f90pagerank',
+                                        sources=['graphflow/pagerank/f90pagerank.f90',
+                                                 'graphflow/pagerank/f90pagerank.pyf'])
 
 
 def readme():
