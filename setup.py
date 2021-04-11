@@ -1,25 +1,26 @@
 
 # must import thisfirst. Ref: # must import this. Ref: https://stackoverflow.com/questions/7932028/setup-py-for-packages-that-depend-on-both-cython-and-f2py?rq=1
+
+# reference about how f2py and cython modules coexists:
+# https://stackoverflow.com/questions/7932028/setup-py-for-packages-that-depend-on-both-cython-and-f2py
+
 from setuptools import setup
+
+try:
+    from Cython.Build import cythonize
+    dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
+except ImportError:
+    from setuptools import Extension
+    dynprog_ext_modules = [Extension('graphflow.pagerank.cpagerank',
+                                     sources=['graphflow/pagerank/cpagerank.c'])]
+
 import numpy as np
 from numpy.distutils.core import setup
 from numpy.distutils.core import Extension as fortranExtension
 
-
-try:
-    from Cython.Build import cythonize
-    print('Cython')
-    dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
-except ImportError:
-    from setuptools import Extension
-    print('C++')
-    dynprog_ext_modules = [Extension('graphflow.pagerank.cpagerank',
-                                     sources=['graphflow/pagerank/cpagerank.c'])]
-
-print('Fortran extension')
-fortran_ext_modules = fortranExtension('f90pagerank',
-                                        sources=['graphflow/pagerank/f90pagerank.f90',
-                                                 'graphflow/pagerank/f90pagerank.pyf'])
+fortran_ext_modules = [fortranExtension('f90pagerank',
+                                         sources=['graphflow/pagerank/f90pagerank.f90',
+                                                  'graphflow/pagerank/f90pagerank.pyf'])]
 
 
 def readme():
@@ -57,7 +58,7 @@ setup(name='graphflow',
       packages=['graphflow',
                 'graphflow.pagerank',
                 'graphflow.simvoltage',
-                'graphflow.hits',],
+                'graphflow.hits'],
       package_data={'graphflow': ['pagerank/*.f90', 'pagerank/*.pyf',
                                   'pagerank/*.c', 'pagerank/*.pyx'],
                     'test': ['*.csv']},
@@ -67,10 +68,7 @@ setup(name='graphflow',
           'unittest2', 'pandas',
       ],
       include_dirs=[np.get_include()],
-      ext_modules=[fortranExtension('f90pagerank',
-                                    sources=['graphflow/pagerank/f90pagerank.f90',
-                                             'graphflow/pagerank/f90pagerank.pyf']),
-                  ] + dynprog_ext_modules,
+      ext_modules=fortran_ext_modules+dynprog_ext_modules,
       include_package_data=True,
       test_suite="test",
       zip_safe=False)
