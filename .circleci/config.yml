@@ -21,7 +21,6 @@ shared: &shared
           pip install --upgrade --user pandas
           pip install --upgrade --user Cython
           pip install --upgrade --user .
-          pip install --upgrade --user unittest2
 
     - run:
         name: Run Unit Tests

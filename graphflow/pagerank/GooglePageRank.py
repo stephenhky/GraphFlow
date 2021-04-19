@@ -2,7 +2,7 @@ import warnings
 
 import numpy as np
 
-from f90pagerank import f90pagerank as fpr
+from .f90pagerank import f90pagerank as fpr
 from .cpagerank import pagerank_cython
 from .. import L1norm, PageRankLanguage
 

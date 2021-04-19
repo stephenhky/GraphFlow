@@ -18,7 +18,7 @@ import numpy as np
 from numpy.distutils.core import setup
 from numpy.distutils.core import Extension as fortranExtension
 
-fortran_ext_modules = [fortranExtension('f90pagerank',
+fortran_ext_modules = [fortranExtension('graphflow.pagerank.f90pagerank',
                                          sources=['graphflow/pagerank/f90pagerank.f90',
                                                   'graphflow/pagerank/f90pagerank.pyf'])]
 
@@ -33,7 +33,7 @@ def install_requirements():
 
 
 setup(name='graphflow',
-      version="0.4.0",
+      version="0.4.1",
       description="Algorithms for Graph Flow Analysis",
       long_description="Numerical routines for analyzing data represented by graphs",
       classifiers=[
@@ -65,7 +65,7 @@ setup(name='graphflow',
       setup_requires=['numpy', 'Cython'],
       install_requires=install_requirements(),
       tests_require=[
-          'unittest2', 'pandas',
+          'pandas',
       ],
       include_dirs=[np.get_include()],
       ext_modules=fortran_ext_modules+dynprog_ext_modules,
