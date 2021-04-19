@@ -1,6 +1,7 @@
 News
 ====
 
+* 04/19/2021: `graphflow` 0.4.1 released.
 * 04/10/2021: `graphflow` 0.4.0 released.
 * 04/09/2020: `graphflow` 0.3.0 released.
 * 04/07/2020: `graphflow` 0.2.1 released.
@@ -15,7 +16,18 @@ News
 What's New
 ----------
 
-Release 0.3.0 (April 9, 2020)
+Release 0.4.1 (April 19, 2021)
+------------------------------
+
+* Refactoring Fortran 90 implementation imports.
+
+Release 0.4.0 (April 10, 2021)
+------------------------------
+
+* Replacing TravisCI with CircleCI in continuous integration (CI) pipeline;
+* Huge refactoring.
+
+Release 0.3.0 (April 09, 2020)
 -----------------------------
 
 * Support for Python 3.8;
