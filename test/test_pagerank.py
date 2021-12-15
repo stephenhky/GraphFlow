@@ -3,6 +3,7 @@ import unittest
 
 import networkx as nx
 import graphflow
+import graphflow.pagerank.GooglePageRank
 from graphflow import PageRankLanguage
 
 nodes = ['Stephen', 'John', 'Mary',
@@ -69,10 +70,10 @@ class test_pagerank(unittest.TestCase):
         graph.add_nodes_from(nodes)
         graph.add_weighted_edges_from(edges)
 
-        self.googlematrix, self.nodedict = graphflow.pagerank.GoogleMatrix(graph, 0.15)
+        self.googlematrix, self.nodedict = graphflow.pagerank.GooglePageRank.GoogleMatrix(graph, 0.15)
 
     def testNetwork_fortran(self):
-        pagerank = graphflow.pagerank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.FORTRAN)
+        pagerank = graphflow.pagerank.GooglePageRank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.FORTRAN)
 
         self.assertEqual(len(pagerank), len(pagerank_answer))
         self.assertEqual(len(set(pagerank.keys()).intersection(set(pagerank_answer.keys()))), len(pagerank))
@@ -80,7 +81,7 @@ class test_pagerank(unittest.TestCase):
             self.assertAlmostEqual(pagerank[name], pagerank_answer[name], places=5)
 
     def testNetwork_python(self):
-        pagerank = graphflow.pagerank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.PYTHON)
+        pagerank = graphflow.pagerank.GooglePageRank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.PYTHON)
 
         self.assertEqual(len(pagerank), len(pagerank_answer))
         self.assertEqual(len(set(pagerank.keys()).intersection(set(pagerank_answer.keys()))), len(pagerank))
@@ -88,7 +89,7 @@ class test_pagerank(unittest.TestCase):
             self.assertAlmostEqual(pagerank[name], pagerank_answer[name], places=5)
 
     def testNetwork_cython(self):
-        pagerank = graphflow.pagerank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.CYTHON)
+        pagerank = graphflow.pagerank.GooglePageRank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.CYTHON)
 
         self.assertEqual(len(pagerank), len(pagerank_answer))
         self.assertEqual(len(set(pagerank.keys()).intersection(set(pagerank_answer.keys()))), len(pagerank))

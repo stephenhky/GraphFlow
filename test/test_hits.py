@@ -4,6 +4,7 @@ import unittest
 import numpy as np
 import networkx as nx
 import graphflow
+import graphflow.hits
 
 
 class testHITS(unittest.TestCase):
