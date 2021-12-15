@@ -5,6 +5,10 @@
 [![Documentation Status](https://readthedocs.org/projects/graphflow/badge/?version=latest)](https://graphflow.readthedocs.io/en/latest/?badge=latest)
 [![Updates](https://pyup.io/repos/github/stephenhky/GraphFlow/shield.svg)](https://pyup.io/repos/github/stephenhky/GraphFlow/)
 [![Python 3](https://pyup.io/repos/github/stephenhky/GraphFlow/python-3-shield.svg)](https://pyup.io/repos/github/stephenhky/GraphFlow/)
+[![pypi](https://img.shields.io/pypi/v/graphflow.svg?maxAge=3600)](https://pypi.org/project/graphflow/)
+[![download](https://img.shields.io/pypi/dm/graphflow.svg?maxAge=2592000&label=installs&color=%2327B1FF)](https://pypi.org/project/grapgflow/)
+[![stars](https://img.shields.io/github/stars/stephenhky/GraphFlow.svg?style=social&label=Star&maxAge=60)](https://github.com/stephenhky/GraphFlow)
+
 
 This Python package provides numerical routines for graph flow analysis, particularly:
 
@@ -24,6 +28,7 @@ After ensuring they have been installed, type the following to install `graphflo
 
 # News
 
+* 12/15/2021: `graphflow` 0.4.2 released.
 * 04/19/2021: `graphflow` 0.4.1 released.
 * 04/10/2021: `graphflow` 0.4.0 released.
 * 04/09/2020: `graphflow` 0.3.0 released.
