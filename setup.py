@@ -5,6 +5,7 @@
 # https://stackoverflow.com/questions/7932028/setup-py-for-packages-that-depend-on-both-cython-and-f2py
 
 from setuptools import setup
+import numpy as np
 
 try:
     from Cython.Build import cythonize
@@ -58,7 +59,7 @@ setup(name='graphflow',
       tests_require=[
           'pandas',
       ],
-      # include_dirs=[np.get_include()],
+      include_dirs=[np.get_include()],
       ext_modules=dynprog_ext_modules,
       include_package_data=True,
       test_suite="test",
