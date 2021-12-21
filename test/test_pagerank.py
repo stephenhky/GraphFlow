@@ -73,12 +73,13 @@ class test_pagerank(unittest.TestCase):
         self.googlematrix, self.nodedict = graphflow.pagerank.GooglePageRank.GoogleMatrix(graph, 0.15)
 
     def testNetwork_fortran(self):
-        pagerank = graphflow.pagerank.GooglePageRank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.FORTRAN)
-
-        self.assertEqual(len(pagerank), len(pagerank_answer))
-        self.assertEqual(len(set(pagerank.keys()).intersection(set(pagerank_answer.keys()))), len(pagerank))
-        for name in pagerank:
-            self.assertAlmostEqual(pagerank[name], pagerank_answer[name], places=5)
+        self.assertRaises(
+            ValueError,
+            graphflow.pagerank.GooglePageRank.CalculatePageRankFromAdjacencyMatri,
+            adjMatrix=self.googlematrix,
+            nodes=self.nodedict,
+            language=PageRankLanguage.FORTRAN
+        )
 
     def testNetwork_python(self):
         pagerank = graphflow.pagerank.GooglePageRank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.PYTHON)

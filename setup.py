@@ -14,14 +14,6 @@ except ImportError:
     dynprog_ext_modules = [Extension('graphflow.pagerank.cpagerank',
                                      sources=['graphflow/pagerank/cpagerank.c'])]
 
-import numpy as np
-from numpy.distutils.core import setup
-from numpy.distutils.core import Extension as fortranExtension
-
-fortran_ext_modules = [fortranExtension('graphflow.pagerank.f90pagerank',
-                                         sources=['graphflow/pagerank/f90pagerank.f90',
-                                                  'graphflow/pagerank/f90pagerank.pyf'])]
-
 
 def readme():
     with open('README.md') as f:
@@ -33,7 +25,7 @@ def install_requirements():
 
 
 setup(name='graphflow',
-      version="0.4.2",
+      version="0.5.0a1",
       description="Algorithms for Graph Flow Analysis",
       long_description="Numerical routines for analyzing data represented by graphs",
       classifiers=[
@@ -66,8 +58,8 @@ setup(name='graphflow',
       tests_require=[
           'pandas',
       ],
-      include_dirs=[np.get_include()],
-      ext_modules=fortran_ext_modules+dynprog_ext_modules,
+      # include_dirs=[np.get_include()],
+      ext_modules=dynprog_ext_modules,
       include_package_data=True,
       test_suite="test",
       zip_safe=False)
