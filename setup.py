@@ -26,7 +26,7 @@ def install_requirements():
 
 
 setup(name='graphflow',
-      version="0.4.3a2",
+      version="0.4.3",
       description="Algorithms for Graph Flow Analysis",
       long_description="Numerical routines for analyzing data represented by graphs",
       classifiers=[
@@ -38,7 +38,6 @@ setup(name='graphflow',
           "Programming Language :: Python :: 3.8",
           "Programming Language :: Python :: 3.9",
           "Programming Language :: Python :: 3.10",
-          "Programming Language :: Fortran",
           "Programming Language :: Cython",
           "Programming Language :: C",
           "License :: OSI Approved :: MIT License",
