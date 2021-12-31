@@ -5,6 +5,7 @@
 # https://stackoverflow.com/questions/7932028/setup-py-for-packages-that-depend-on-both-cython-and-f2py
 
 from setuptools import setup
+import numpy as np
 
 try:
     from Cython.Build import cythonize
@@ -13,14 +14,6 @@ except ImportError:
     from setuptools import Extension
     dynprog_ext_modules = [Extension('graphflow.pagerank.cpagerank',
                                      sources=['graphflow/pagerank/cpagerank.c'])]
-
-import numpy as np
-from numpy.distutils.core import setup
-from numpy.distutils.core import Extension as fortranExtension
-
-fortran_ext_modules = [fortranExtension('graphflow.pagerank.f90pagerank',
-                                         sources=['graphflow/pagerank/f90pagerank.f90',
-                                                  'graphflow/pagerank/f90pagerank.pyf'])]
 
 
 def readme():
@@ -68,7 +61,7 @@ setup(name='graphflow',
           'pandas',
       ],
       include_dirs=[np.get_include()],
-      ext_modules=fortran_ext_modules+dynprog_ext_modules,
+      ext_modules=dynprog_ext_modules,
       include_package_data=True,
       test_suite="test",
       zip_safe=False)
