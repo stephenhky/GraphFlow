@@ -1,6 +1,9 @@
 News
 ====
 
+* 10/04/2022: `graphflow` 0.4.4 released.
+* 12/31/2021: `graphflow` 0.4.3 released.
+* 12/15/2021: `graphflow` 0.4.2 released.
 * 04/19/2021: `graphflow` 0.4.1 released.
 * 04/10/2021: `graphflow` 0.4.0 released.
 * 04/09/2020: `graphflow` 0.3.0 released.
@@ -15,6 +18,23 @@ News
 
 What's New
 ----------
+
+Release 0.4.4 (December 31, 2021)
+---------------------------------
+
+* No `numpy` and `Cython` dependencies before installation;
+* Updated CircleCI pipeline.
+
+Release 0.4.3 (December 31, 2021)
+---------------------------------
+
+* Remove Fortran.
+* Support for Python 3.10.
+
+Release 0.4.2 (December 15, 2021)
+---------------------------------
+
+* Support for Python 3.10.
 
 Release 0.4.1 (April 19, 2021)
 ------------------------------
