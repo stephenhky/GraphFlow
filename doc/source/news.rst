@@ -1,6 +1,7 @@
 News
 ====
 
+* 10/29/2022: `graphflow` 0.4.5 released.
 * 10/04/2022: `graphflow` 0.4.4 released.
 * 12/31/2021: `graphflow` 0.4.3 released.
 * 12/15/2021: `graphflow` 0.4.2 released.
