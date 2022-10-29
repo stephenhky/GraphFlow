@@ -19,7 +19,12 @@ News
 What's New
 ----------
 
-Release 0.4.4 (December 31, 2021)
+Release 0.4.5 (October 29, 2021)
+---------------------------------
+
+* Support for Python 3.11.
+
+Release 0.4.4 (October 4, 2021)
 ---------------------------------
 
 * No `numpy` and `Cython` dependencies before installation;
