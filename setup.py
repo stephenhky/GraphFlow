@@ -1,12 +1,12 @@
 
 from setuptools import setup, Extension
 import numpy as np
-# from Cython.Build import cythonize
+from Cython.Build import cythonize
 
-# dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
-dynprog_ext_modules = [
-    Extension('graphflow.pagerank.cpagerank', ['graphflow/pagerank/cpagerank.c'])
-]
+dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
+# dynprog_ext_modules = [
+#     Extension('graphflow.pagerank.cpagerank', ['graphflow/pagerank/cpagerank.c'])
+# ]
 
 
 def readme():
@@ -19,7 +19,7 @@ def install_requirements():
 
 
 setup(name='graphflow',
-      version="0.5.0a1",
+      version="0.5.0a2",
       description="Algorithms for Graph Flow Analysis",
       long_description="Numerical routines for analyzing data represented by graphs",
       classifiers=[
