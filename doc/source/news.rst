@@ -1,6 +1,7 @@
 News
 ====
 
+* 06/20/2023: `graphflow` 0.5.0 released.
 * 10/29/2022: `graphflow` 0.4.5 released.
 * 10/04/2022: `graphflow` 0.4.4 released.
 * 12/31/2021: `graphflow` 0.4.3 released.
@@ -20,12 +21,18 @@ News
 What's New
 ----------
 
-Release 0.4.5 (October 29, 2021)
+Release 0.5.0 (June 20, 2023)
+-----------------------------
+
+* Upgraded some codes for newer versions of `numpy` and `networkx`;
+* Removed support for Python 3.6 and 3.7.
+
+Release 0.4.5 (October 29, 2022)
 ---------------------------------
 
 * Support for Python 3.11.
 
-Release 0.4.4 (October 4, 2021)
+Release 0.4.4 (October 4, 2022)
 ---------------------------------
 
 * No `numpy` and `Cython` dependencies before installation;
