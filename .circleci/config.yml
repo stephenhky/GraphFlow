@@ -11,6 +11,7 @@ shared: &shared
         command: |
           sudo apt-get update
           sudo apt-get install libc6
+          sudo apt-get install -y g++
           sudo apt-get install gfortran
 
     - run:
