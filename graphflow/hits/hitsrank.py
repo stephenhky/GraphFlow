@@ -44,7 +44,7 @@ def CalculateHITS(digraph, eps=1e-4, maxstep=1000):
     :param maxstep:
     :return:
     """
-    A = nx.adj_matrix(digraph).toarray()
+    A = nx.adjacency_matrix(digraph).toarray()
     nodes = list(digraph.nodes())
     hubvec, authvec = hits(A, eps=eps, maxstep=maxstep)
     hubdict = {nodes[i]: hubvec[i] for i in range(len(hubvec))}

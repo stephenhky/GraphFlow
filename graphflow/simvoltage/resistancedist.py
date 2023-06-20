@@ -58,7 +58,7 @@ class GraphResistanceDistance:
 
         :return:
         """
-        Dmatrix = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float)
+        Dmatrix = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float_)
         for edge in self.edges:
             for node in edge:
                 idx = self.nodesIdx[node]
@@ -70,7 +70,7 @@ class GraphResistanceDistance:
 
         :return:
         """
-        Amatrix = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float)
+        Amatrix = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float_)
         for edge in self.edges:
             idx0 = self.nodesIdx[edge[0]]
             idx1 = self.nodesIdx[edge[1]]
@@ -87,7 +87,7 @@ class GraphResistanceDistance:
         Amatrix = self.calculateAdjacencyMatrix()
         Lmatrix = Dmatrix.toarray() - Amatrix.toarray()
         Lambda = np.linalg.pinv(Lmatrix)
-        Omega = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float)
+        Omega = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float_)
         for i in range(len(self.nodes)):
             for j in range(len(self.nodes)):
                 Omega[i, j] = Lambda[i, i] + Lambda[j, j] - 2 * Lambda[i, j]
