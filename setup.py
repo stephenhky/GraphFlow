@@ -19,7 +19,7 @@ def install_requirements():
 
 
 setup(name='graphflow',
-      version="0.5.0a2",
+      version="0.5.0",
       description="Algorithms for Graph Flow Analysis",
       long_description="Numerical routines for analyzing data represented by graphs",
       classifiers=[
