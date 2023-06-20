@@ -58,7 +58,7 @@ class GraphResistanceDistance:
 
         :return:
         """
-        Dmatrix = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float)
+        Dmatrix = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float_)
         for edge in self.edges:
             for node in edge:
                 idx = self.nodesIdx[node]
