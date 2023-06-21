@@ -22,6 +22,7 @@ shared: &shared
           pip install --upgrade --user pandas
           pip install --upgrade --user Cython
           pip install --upgrade --user .
+          CC=gcc python setup.py build_ext --inplace
 
     - run:
         name: Run Unit Tests
