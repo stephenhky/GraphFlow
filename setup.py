@@ -1,12 +1,15 @@
 
-from setuptools import setup, Extension
+from setuptools import setup
 import numpy as np
-from Cython.Build import cythonize
 
-dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
-# dynprog_ext_modules = [
-#     Extension('graphflow.pagerank.cpagerank', ['graphflow/pagerank/cpagerank.c'])
-# ]
+try:
+    from Cython.Build import cythonize
+    dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
+except ImportError:
+    from setuptools import Extension
+    dynprog_ext_modules = [
+        Extension('graphflow.pagerank.cpagerank', ['graphflow/pagerank/cpagerank.c'])
+    ]
 
 
 def readme():
