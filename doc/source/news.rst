@@ -22,7 +22,7 @@ News
 What's New
 ----------
 
-Release 0.5.1 (Augusy 20, 2023)
+Release 0.5.1 (August 20, 2023)
 -------------------------------
 
 * Update package requirements for ReadTheDocs and security issues.
