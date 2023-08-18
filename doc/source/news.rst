@@ -1,6 +1,7 @@
 News
 ====
 
+* 08/18/2023: `graphflow` 0.5.1 released.
 * 06/20/2023: `graphflow` 0.5.0 released.
 * 10/29/2022: `graphflow` 0.4.5 released.
 * 10/04/2022: `graphflow` 0.4.4 released.
@@ -20,6 +21,12 @@ News
 
 What's New
 ----------
+
+Release 0.5.1 (August 20, 2023)
+-------------------------------
+
+* Update package requirements for ReadTheDocs and security issues.
+
 
 Release 0.5.0 (June 20, 2023)
 -----------------------------
