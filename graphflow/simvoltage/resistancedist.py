@@ -90,7 +90,7 @@ class GraphResistanceDistance:
         Amatrix = self.calculateAdjacencyMatrix()
         # Lmatrix = Dmatrix.toarray() - Amatrix.toarray()
         Lmatrix = Dmatrix - Amatrix
-        Lambda = np.linalg.pinv(Lmatrix)
+        Lambda = np.linalg.pinv(Lmatrix.todense())
         # Omega = dok_matrix((len(self.nodes), len(self.nodes)), dtype=np.float_)
         Omega = sparse.DOK((len(self.nodes), len(self.nodes)))
         for i in range(len(self.nodes)):
