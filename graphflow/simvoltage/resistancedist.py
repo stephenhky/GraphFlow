@@ -6,7 +6,6 @@ See: http://en.wikipedia.org/wiki/Resistance_distance
 '''
 
 import numpy as np
-# from scipy.sparse import dok_matrix
 import sparse
 
 default_nodes = ['Stephen', 'Sinnie', 'Elaine']
