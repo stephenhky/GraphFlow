@@ -1,4 +1,4 @@
 Cython>=0.29.0
 numpy>=1.20.0
-scipy>=1.10.0
 networkx>=3.0
+sparse>=0.10.0
