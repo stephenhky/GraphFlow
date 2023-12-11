@@ -1,6 +1,7 @@
 News
 ====
 
+* 10/10/2023: `graphflow` 0.6.0 released.
 * 08/18/2023: `graphflow` 0.5.1 released.
 * 06/20/2023: `graphflow` 0.5.0 released.
 * 10/29/2022: `graphflow` 0.4.5 released.
@@ -21,6 +22,11 @@ News
 
 What's New
 ----------
+
+Release 0.6.0 (December 10, 2023)
+---------------------------------
+
+* Use of package `sparse` for sparce matrices instead of `scipy.sparse`.
 
 Release 0.5.1 (August 20, 2023)
 -------------------------------
