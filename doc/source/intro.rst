@@ -8,7 +8,7 @@ This Python package provides numerical routines for graph flow analysis, particu
 * Non-linear System of Resistance
 * HITS (Hyperlink-Induced Topic Search)
 
-Author: Kwan-Yuet Ho (LinkedIn_, ResearchGate_, Twitter_)
+Author: Kwan Yuet Stephen Ho (LinkedIn_, ResearchGate_, Twitter_)
 
 Home: :doc:`index`
 

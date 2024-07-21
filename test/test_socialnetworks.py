@@ -62,7 +62,7 @@ class test_SocialNetwork(unittest.TestCase):
         testresults = pd.read_csv(os.path.join(THIS_DIR, 'socialnetworkranks.csv'),
                                   header=None,
                                   names=['name1', 'name2', 'resistance'],
-                                  dtype={'name1': str, 'name2': str, 'resistance': np.float_})
+                                  dtype={'name1': str, 'name2': str, 'resistance': np.float64})
 
         for _, row in testresults.iterrows():
             name1 = row['name1']

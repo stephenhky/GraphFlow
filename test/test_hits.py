@@ -21,12 +21,12 @@ class testHITS(unittest.TestCase):
 
         hubdict, authdict = graphflow.hits.CalculateHITS(forkgr)
 
-        self.assertAlmostEquals(hubdict['a'], np.sqrt(0.5))
-        self.assertAlmostEquals(hubdict['b'], 0.0)
-        self.assertAlmostEquals(hubdict['c'], np.sqrt(0.5))
-        self.assertAlmostEquals(authdict['a'], 0.0)
-        self.assertAlmostEquals(authdict['b'], 1.0)
-        self.assertAlmostEquals(authdict['c'], 0.0)
+        self.assertAlmostEqual(hubdict['a'], np.sqrt(0.5))
+        self.assertAlmostEqual(hubdict['b'], 0.0)
+        self.assertAlmostEqual(hubdict['c'], np.sqrt(0.5))
+        self.assertAlmostEqual(authdict['a'], 0.0)
+        self.assertAlmostEqual(authdict['b'], 1.0)
+        self.assertAlmostEqual(authdict['c'], 0.0)
 
 
 if __name__ == '__main__':
