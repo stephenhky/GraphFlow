@@ -1,6 +1,7 @@
 News
 ====
 
+* 07/21/2023: `graphflow` 0.6.1 released.
 * 10/10/2023: `graphflow` 0.6.0 released.
 * 08/18/2023: `graphflow` 0.5.1 released.
 * 06/20/2023: `graphflow` 0.5.0 released.
@@ -22,6 +23,12 @@ News
 
 What's New
 ----------
+
+Release 0.6.1 (July 21, 2023)
+-----------------------------
+
+* Updated `np.float_` to `np.float64`.
+* Unit tests updated.
 
 Release 0.6.0 (December 10, 2023)
 ---------------------------------
