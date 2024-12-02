@@ -12,26 +12,19 @@ shared: &shared
           sudo apt-get -y update
           sudo apt-get install -y libc6
           sudo apt-get install -y g++
-          sudo apt-get install -y gfortran
-          sudo apt-get install -y python3-dev
 
     - run:
         name: Installing Packages
         command: |
           pip install --upgrade --user pip
-          pip install --upgrade --user numpy
-          pip install --upgrade --user pandas
-          pip install --upgrade --user Cython
           pip install --upgrade --user .
           CC=gcc python setup.py build_ext --inplace
 
     - run:
         name: Run Unit Tests
         command: |
-          pip install -U pytest
-          pip install -U pytest-cython
+          pip install --upgrade --user .[test]
           pytest --doctest-cython
-
 
 
 jobs:

@@ -19,15 +19,15 @@ This Python package provides numerical routines for graph flow analysis, particu
 
 # Installation
 
-You must have `numpy` pre-installed. GCC and GFORTRAN compilers have to be available in the machine.
-After ensuring they have been installed, type the following to install `graphflow`:
+Type the following to install `graphflow`:
 
 ```
->>> pip install -U graphflow
+>>> pip install graphflow
 ```
 
 # News
 
+* 12/02/2024: `graphflow` 0.6.2 released.
 * 07/21/2023: `graphflow` 0.6.1 released.
 * 10/10/2023: `graphflow` 0.6.0 released.
 * 08/18/2023: `graphflow` 0.5.1 released.
