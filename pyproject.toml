@@ -9,7 +9,6 @@ authors = [
     {name = "Kwan Yuet Stephen Ho", email = "stephenhky@yahoo.com.hk"}
 ]
 description = "Algorithms for Graph Flow Analysis"
-long_description = "Numerical routines for analyzing data represented by graphs"
 readme = {file = "README.md", content-type = "text/markdown"}
 license = {text = "MIT"}
 keywords = ["network", "graph"]
