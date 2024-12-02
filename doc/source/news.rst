@@ -1,6 +1,7 @@
 News
 ====
 
+* 12/02/2024: `graphflow` 0.6.2 released.
 * 07/21/2023: `graphflow` 0.6.1 released.
 * 10/10/2023: `graphflow` 0.6.0 released.
 * 08/18/2023: `graphflow` 0.5.1 released.
@@ -23,6 +24,11 @@ News
 
 What's New
 ----------
+
+Release 0.6.2 (December 2, 2024)
+-----------------------------
+
+* Package distribution using `pyproject.toml`.
 
 Release 0.6.1 (July 21, 2023)
 -----------------------------
