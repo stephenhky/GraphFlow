@@ -42,4 +42,4 @@ packages = [
 zip-safe = false
 
 [project.optional-dependencies]
-test = ["unittest2", "pytest", "pytest-cython", "pandas"]
+test = ["unittest2", "pytest", "pytest-cython", "pandas", "scipy"]
