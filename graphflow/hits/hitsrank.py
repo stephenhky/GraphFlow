@@ -13,7 +13,7 @@ def hits(
         adjMatrix: NDArray[Shape["*, *"], Float],
         eps: float=1e-4,
         maxstep: int=1000
-) -> tuple[NDArray[Shape["*"], Float], NDArray[Shape["*", Float]]]:
+) -> tuple[NDArray[Shape["*"], Float], NDArray[Shape["*"], Float]]:
     """
     Compute the HITS (Hyperlink-Induced Topic Search) algorithm on an adjacency matrix.
     
@@ -64,7 +64,7 @@ def CalculateHITS(
         digraph: networkx.DiGraph,
         eps: float=1e-4,
         maxstep: int=1000
-) -> tuple[NDArray[Shape["*"], Float], NDArray[Shape["*", Float]]]:
+) -> tuple[NDArray[Shape["*"], Float], NDArray[Shape["*"], Float]]:
     """
     Compute the HITS (Hyperlink-Induced Topic Search) algorithm on a NetworkX digraph.
     
