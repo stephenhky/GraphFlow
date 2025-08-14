@@ -8,8 +8,11 @@ See: http://en.wikipedia.org/wiki/Resistance_distance
 import numpy as np
 import sparse
 
-default_nodes = ['Stephen', 'Sinnie', 'Elaine']
-default_edges = [('Stephen', 'Sinnie'),
+from .exceptions import UnknownNodeException
+
+
+DEFAULT_NODES = ['Stephen', 'Sinnie', 'Elaine']
+DEFAULT_EDGES = [('Stephen', 'Sinnie'),
                  ('Elaine', 'Sinnie'),
                  ('Elaine', 'Stephen')]
 
@@ -24,7 +27,7 @@ class GraphResistanceDistance:
     
     See: http://en.wikipedia.org/wiki/Resistance_distance
     """
-    def __init__(self, nodes=default_nodes, edges=default_edges):
+    def __init__(self, nodes: list[str]=None, edges: list[tuple[str, str]]=None):
         """
         Initialize the GraphResistanceDistance class.
         
@@ -36,10 +39,15 @@ class GraphResistanceDistance:
             List of edges as tuples (node1, node2). Default is
             [('Stephen', 'Sinnie'), ('Elaine', 'Sinnie'), ('Elaine', 'Stephen')].
         """
+        if nodes is None:
+            nodes = DEFAULT_NODES
+        if edges is None:
+            edges = DEFAULT_EDGES
+
         self.initializeClass(nodes, edges)
         self.Omega = self.computeResistanceDistance()
         
-    def getResistance(self, node1, node2):
+    def getResistance(self, node1: str, node2: str) -> float:
         """
         Get the resistance distance between two nodes.
         
@@ -57,7 +65,7 @@ class GraphResistanceDistance:
         
         Raises
         ------
-        Exception
+        UnknownNodeException
             If either node is not in the graph.
         """
         if (node1 in self.nodesIdx) and (node2 in self.nodesIdx):
@@ -66,15 +74,15 @@ class GraphResistanceDistance:
             return self.Omega[idx0, idx1]
         else:
             unknown_keys = [node for node in [node1, node2] if not node in self.nodesIdx]
-            raise Exception('Unknown key(s): '+' '.join(unknown_keys))
+            raise UnknownNodeException(unknown_keys)
     
-    def initializeClass(self, nodes, edges):
+    def initializeClass(self, nodes: list[str], edges: list[tuple[str, str]]) -> None:
         """
         Initialize the class with nodes and edges.
         
         Parameters
         ----------
-        nodes : list
+        nodes : list[str]
             List of node identifiers.
         edges : list of tuples
             List of edges as tuples (node1, node2).
@@ -84,7 +92,7 @@ class GraphResistanceDistance:
         self.edges = list(set([tuple(sorted(edge)) for edge in edges]))
         self.nodesIdx = {self.nodes[idx]: idx for idx in range(len(self.nodes))}
 
-    def calculateDegreeMatrix(self):
+    def calculateDegreeMatrix(self) -> sparse.SparseArray:
         """
         Calculate the degree matrix of the graph.
         
@@ -93,7 +101,7 @@ class GraphResistanceDistance:
         
         Returns
         -------
-        sparse.DOK
+        sparse.SparseArray
             The degree matrix as a sparse DOK (Dictionary of Keys) matrix.
         """
         Dmatrix = sparse.DOK((len(self.nodes), len(self.nodes)))
@@ -103,7 +111,7 @@ class GraphResistanceDistance:
                 Dmatrix[idx, idx] += 1
         return Dmatrix
         
-    def calculateAdjacencyMatrix(self):
+    def calculateAdjacencyMatrix(self) -> sparse.SparseArray:
         """
         Calculate the adjacency matrix of the graph.
         
@@ -112,7 +120,7 @@ class GraphResistanceDistance:
         
         Returns
         -------
-        sparse.DOK
+        sparse.SparseArray
             The adjacency matrix as a sparse DOK (Dictionary of Keys) matrix.
         """
         Amatrix = sparse.DOK((len(self.nodes), len(self.nodes)))
@@ -123,7 +131,7 @@ class GraphResistanceDistance:
             Amatrix[idx1, idx0] = 1
         return Amatrix
         
-    def computeResistanceDistance(self):
+    def computeResistanceDistance(self) -> sparse.SparseArray:
         """
         Compute the resistance distance matrix for the graph.
         
@@ -132,7 +140,7 @@ class GraphResistanceDistance:
         
         Returns
         -------
-        sparse.DOK
+        sparse.SparseArray
             The resistance distance matrix as a sparse DOK matrix.
         """
         Dmatrix = self.calculateDegreeMatrix()

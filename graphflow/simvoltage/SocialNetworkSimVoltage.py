@@ -4,8 +4,8 @@ from itertools import product
 import networkx as nx
 
 
-default_nodes = ['Stephen', 'Sinnie', 'Elaine']
-default_edges = [('Stephen', 'Sinnie', 0.2),
+DEFAULT_NODES = ['Stephen', 'Sinnie', 'Elaine']
+DEFAULT_EDGES = [('Stephen', 'Sinnie', 0.2),
                  ('Sinnie', 'Stephen', 0.2),
                  ('Sinnie', 'Elaine', 0.3),
                  ('Elaine', 'Sinnie', 0.2),
@@ -21,13 +21,18 @@ class SocialNetworkSimVoltage:
     resistance values. It computes the effective resistance between any two nodes
     using circuit simulation techniques.
     """
-    def __init__(self, nodes=default_nodes, edges=default_edges, precalculated_distance=True):
+    def __init__(
+            self,
+            nodes: list[str]=None,
+            edges: list[tuple[str, str, float]]=None,
+            precalculated_distance: bool=True
+    ):
         """
         Initialize the SocialNetworkSimVoltage class.
         
         Parameters
         ----------
-        nodes : list, optional
+        nodes : list[str], optional
             List of node identifiers. Default is ['Stephen', 'Sinnie', 'Elaine'].
         edges : list of tuples, optional
             List of edges as tuples (node1, node2, weight). Default is
@@ -41,13 +46,13 @@ class SocialNetworkSimVoltage:
         if self.precalculated_distance:
             self.precalculate_distance()
 
-    def initializeClass(self, nodes, edges):
+    def initializeClass(self, nodes: list[str], edges: list[tuple[str, str, float]]) -> None:
         """
         Initialize the class with nodes and edges.
         
         Parameters
         ----------
-        nodes : list
+        nodes : list[str]
             List of node identifiers.
         edges : list of tuples
             List of edges as tuples (node1, node2, weight).
@@ -56,9 +61,9 @@ class SocialNetworkSimVoltage:
         self.errTol = 1e-4
         self.maxSteps = 10000
 
-    def precalculate_distance(self):
+    def precalculate_distance(self) -> dict[tuple[str, str], float]:
         """
-        Precalculate shortest path distances between all pairs of nodes.
+        Precalculate the shortest path distances between all pairs of nodes.
         
         This method computes the shortest path length between all pairs of nodes
         in the network and stores them in a dictionary for quick access.
@@ -71,7 +76,7 @@ class SocialNetworkSimVoltage:
             except nx.exception.NetworkXNoPath:
                 self.distance_matrix[(person1, person2)] = float('inf')
 
-    def constructSocialNetwork(self, nodes, edges):
+    def constructSocialNetwork(self, nodes: list[str], edges: list[tuple[str, str, float]]) -> None:
         """
         Construct the social network as a directed graph.
         
@@ -79,7 +84,7 @@ class SocialNetworkSimVoltage:
         
         Parameters
         ----------
-        nodes : list
+        nodes : list[str]
             List of node identifiers.
         edges : list of tuples
             List of edges as tuples (node1, node2, weight).
@@ -88,7 +93,7 @@ class SocialNetworkSimVoltage:
         self.wordNet.add_nodes_from(nodes)
         self.wordNet.add_weighted_edges_from(edges)
         
-    def checkPersonIrrelevant(self, person, person1, person2):
+    def checkPersonIrrelevant(self, person: str, person1: str, person2: str) -> bool:
         """
         Check if a person is irrelevant for the path between two other people.
         
@@ -121,7 +126,7 @@ class SocialNetworkSimVoltage:
         intersection_paths = list(set(path1) & set(path2))
         return (len(intersection_paths) != 1)
 
-    def initloop(self, person1, person2):
+    def initloop(self, person1: str, person2: str) -> dict[str, float]:
         """
         Initialize voltage values for all nodes in the network.
         
@@ -161,7 +166,7 @@ class SocialNetworkSimVoltage:
             volDict[node] = distFrom2 / (distFrom1 + distFrom2)
         return volDict
 
-    def compute_incurrent(self, node, volDict):
+    def compute_incurrent(self, node: str, volDict: dict[str, float]) -> float:
         """
         Compute the total current flowing into a node.
         
@@ -188,7 +193,7 @@ class SocialNetworkSimVoltage:
                 in_current += potDiff / resEdge
         return in_current
 
-    def compute_outcurrent(self, node, volDict):
+    def compute_outcurrent(self, node: str, volDict: dict[str, float]) -> float:
         """
         Compute the total current flowing out of a node.
         
@@ -215,7 +220,7 @@ class SocialNetworkSimVoltage:
                 out_current += potDiff / resEdge
         return out_current
 
-    def average_VR(self, node, volDict):
+    def average_VR(self, node: str, volDict: dict[str, float]) -> tuple[float, float]:
         """
         Compute the average voltage-to-resistance ratio for a node.
         
@@ -251,7 +256,7 @@ class SocialNetworkSimVoltage:
                 numRecR += 1. / resEdge
         return sumVOverR, numRecR
 
-    def getResistance(self, person1, person2, printVol = False):
+    def getResistance(self, person1: str, person2: str, printVol: bool=False) -> float:
         """
         Compute the resistance distance between two people in the social network.
         
@@ -325,7 +330,7 @@ class SocialNetworkSimVoltage:
                             for rootsucc in self.wordNet.successors(person1) if volDict[rootsucc]<=1.0])
         return (1.0 / startCurrent)
                                 
-    def drawNetwork(self):
+    def drawNetwork(self) -> None:
         """
         Draw the social network using NetworkX.
         

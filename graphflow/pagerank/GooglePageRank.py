@@ -1,12 +1,19 @@
-import warnings
 
+import warnings
+from typing import Tuple
+
+import networkx
 import numpy as np
+from nptyping import NDArray, Shape, Float
 
 from .cpagerank import pagerank_cython
 from .. import L1norm, PageRankLanguage
 
 
-def GoogleMatrix(digraph, beta):
+def GoogleMatrix(
+        digraph: networkx.DiGraph,
+        beta: float
+) -> Tuple[NDArray[Shape["*, *"], Float], dict[str, int]]:
     """
     Compute the Google Matrix for a directed graph.
     
@@ -35,11 +42,21 @@ def GoogleMatrix(digraph, beta):
     return A, nodedict
 
 
-def CalculatePageRankFromAdjacencyMatrix_Cython(adjMatrix, nodes, eps=1e-4, maxstep=1000):
+def CalculatePageRankFromAdjacencyMatrix_Cython(
+        adjMatrix: NDArray[Shape["*, *"], Float],
+        nodes: dict[str, int],
+        eps: float=1e-4,
+        maxstep: int=1000
+):
     return pagerank_cython(adjMatrix, nodes, eps, maxstep)
 
 
-def CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=1e-4, maxstep=1000):
+def CalculatePageRankFromAdjacencyMatrix_Python(
+        adjMatrix: NDArray[Shape["*, *"], Float],
+        nodes: dict[str, int],
+        eps: float=1e-4,
+        maxstep: int=1000
+) -> dict[str, float]:
     """
     Calculate PageRank from an adjacency matrix using Python implementation.
     
@@ -77,9 +94,13 @@ def CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=1e-4, maxs
     return nodepr
 
 
-def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=1000,
-                                         language=PageRankLanguage.CYTHON,
-                                         fortran=True):
+def CalculatePageRankFromAdjacencyMatrix(
+        adjMatrix: NDArray[Shape["*, *"], Float],
+        nodes: dict[str, int],
+        eps: float=1e-4,
+        maxstep: int=1000,
+        language: PageRankLanguage=PageRankLanguage.CYTHON
+) -> dict[str, float]:
     """
     Calculate PageRank from an adjacency matrix using specified implementation language.
     
@@ -100,30 +121,25 @@ def CalculatePageRankFromAdjacencyMatrix(adjMatrix, nodes, eps=1e-4, maxstep=100
         The maximum number of iterations to perform. Default is 1000.
     language : PageRankLanguage, optional
         The implementation language to use. Default is PageRankLanguage.CYTHON.
-    fortran : bool, optional
-        Deprecated parameter. Default is True.
     
     Returns
     -------
     dict
         A dictionary mapping node identifiers to their PageRank scores.
     
-    Raises
-    ------
-    ValueError
-        If Fortran language is specified (no longer supported).
     """
-    if not fortran:
-        warnings.warn('The boolean variable "fortran" is deprecated.')
-    if language == PageRankLanguage.FORTRAN:
-        raise ValueError('Fortran is no longer supported.')
-    elif language == PageRankLanguage.CYTHON:
+    if language == PageRankLanguage.CYTHON:
         return CalculatePageRankFromAdjacencyMatrix_Cython(adjMatrix, nodes, eps=eps, maxstep=maxstep)
     else:
         return CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=eps, maxstep=maxstep)
 
 
-def CalculatePageRank(digraph, beta, eps=1e-4, maxstep=1000, fortran=True):
+def CalculatePageRank(
+        digraph: networkx.DiGraph,
+        beta: float,
+        eps: float=1e-4,
+        maxstep: int=1000
+) -> dict[str, float]:
     """
     Calculate PageRank for a directed graph.
     
@@ -142,14 +158,12 @@ def CalculatePageRank(digraph, beta, eps=1e-4, maxstep=1000, fortran=True):
         is less than this value. Default is 1e-4.
     maxstep : int, optional
         The maximum number of iterations to perform. Default is 1000.
-    fortran : bool, optional
-        Deprecated parameter. Default is True.
-    
+
     Returns
     -------
     dict
         A dictionary mapping node identifiers to their PageRank scores.
     """
     A, nodes = GoogleMatrix(digraph, beta)
-    return CalculatePageRankFromAdjacencyMatrix(A, nodes, eps=eps, maxstep=maxstep, fortran=fortran)
+    return CalculatePageRankFromAdjacencyMatrix(A, nodes, eps=eps, maxstep=maxstep)
 
