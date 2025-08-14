@@ -8,11 +8,28 @@ from graphflow import L1norm
 
 def hits(adjMatrix, eps=1e-4, maxstep=1000):
     """
-
-    :param adjMatrix:
-    :param eps:
-    :param maxstep:
-    :return:
+    Compute the HITS (Hyperlink-Induced Topic Search) algorithm on an adjacency matrix.
+    
+    This function calculates the hub and authority vectors for a given adjacency matrix
+    using the HITS algorithm. The algorithm iteratively computes these vectors until
+    convergence or the maximum number of steps is reached.
+    
+    Parameters
+    ----------
+    adjMatrix : numpy.ndarray
+        The adjacency matrix representing the graph structure.
+    eps : float, optional
+        The convergence threshold. The algorithm stops when the change in vectors
+        is less than this value. Default is 1e-4.
+    maxstep : int, optional
+        The maximum number of iterations to perform. Default is 1000.
+    
+    Returns
+    -------
+    tuple
+        A tuple containing:
+        - hub vector (numpy.ndarray): The hub scores for each node.
+        - authority vector (numpy.ndarray): The authority scores for each node.
     """
     nbnodes = adjMatrix.shape[0]
     # hub vector
@@ -38,11 +55,28 @@ def hits(adjMatrix, eps=1e-4, maxstep=1000):
 
 def CalculateHITS(digraph, eps=1e-4, maxstep=1000):
     """
-
-    :param digraph:
-    :param eps:
-    :param maxstep:
-    :return:
+    Compute the HITS (Hyperlink-Induced Topic Search) algorithm on a NetworkX digraph.
+    
+    This function calculates the hub and authority scores for each node in a directed graph
+    using the HITS algorithm. It converts the graph to an adjacency matrix and then applies
+    the HITS algorithm.
+    
+    Parameters
+    ----------
+    digraph : networkx.DiGraph
+        The directed graph on which to compute the HITS algorithm.
+    eps : float, optional
+        The convergence threshold. The algorithm stops when the change in vectors
+        is less than this value. Default is 1e-4.
+    maxstep : int, optional
+        The maximum number of iterations to perform. Default is 1000.
+    
+    Returns
+    -------
+    tuple
+        A tuple containing:
+        - hubdict (dict): A dictionary mapping node identifiers to their hub scores.
+        - authdict (dict): A dictionary mapping node identifiers to their authority scores.
     """
     A = nx.adjacency_matrix(digraph).toarray()
     nodes = list(digraph.nodes())

@@ -15,23 +15,50 @@ default_edges = [('Stephen', 'Sinnie'),
 
 class GraphResistanceDistance:
     """
-
+    Compute the resistance distance matrix of a simple undirected network.
+    
+    This class calculates the resistance distance between all pairs of nodes
+    in an undirected graph using the Moore-Penrose pseudoinverse of the Laplacian matrix.
+    Resistance distance is a measure of how well-connected two nodes are in a network,
+    considering all possible paths between them.
+    
+    See: http://en.wikipedia.org/wiki/Resistance_distance
     """
     def __init__(self, nodes=default_nodes, edges=default_edges):
         """
-
-        :param nodes:
-        :param edges:
+        Initialize the GraphResistanceDistance class.
+        
+        Parameters
+        ----------
+        nodes : list, optional
+            List of node identifiers. Default is ['Stephen', 'Sinnie', 'Elaine'].
+        edges : list of tuples, optional
+            List of edges as tuples (node1, node2). Default is
+            [('Stephen', 'Sinnie'), ('Elaine', 'Sinnie'), ('Elaine', 'Stephen')].
         """
         self.initializeClass(nodes, edges)
         self.Omega = self.computeResistanceDistance()
         
     def getResistance(self, node1, node2):
         """
-
-        :param node1:
-        :param node2:
-        :return:
+        Get the resistance distance between two nodes.
+        
+        Parameters
+        ----------
+        node1 : str
+            The identifier of the first node.
+        node2 : str
+            The identifier of the second node.
+        
+        Returns
+        -------
+        float
+            The resistance distance between the two nodes.
+        
+        Raises
+        ------
+        Exception
+            If either node is not in the graph.
         """
         if (node1 in self.nodesIdx) and (node2 in self.nodesIdx):
             idx0 = self.nodesIdx[node1]
@@ -43,10 +70,14 @@ class GraphResistanceDistance:
     
     def initializeClass(self, nodes, edges):
         """
-
-        :param nodes:
-        :param edges:
-        :return:
+        Initialize the class with nodes and edges.
+        
+        Parameters
+        ----------
+        nodes : list
+            List of node identifiers.
+        edges : list of tuples
+            List of edges as tuples (node1, node2).
         """
         self.nodes = nodes
         # all edges are unique
@@ -55,8 +86,15 @@ class GraphResistanceDistance:
 
     def calculateDegreeMatrix(self):
         """
-
-        :return:
+        Calculate the degree matrix of the graph.
+        
+        The degree matrix is a diagonal matrix where each diagonal entry
+        represents the degree of the corresponding node (number of edges connected to it).
+        
+        Returns
+        -------
+        sparse.DOK
+            The degree matrix as a sparse DOK (Dictionary of Keys) matrix.
         """
         Dmatrix = sparse.DOK((len(self.nodes), len(self.nodes)))
         for edge in self.edges:
@@ -67,8 +105,15 @@ class GraphResistanceDistance:
         
     def calculateAdjacencyMatrix(self):
         """
-
-        :return:
+        Calculate the adjacency matrix of the graph.
+        
+        The adjacency matrix is a square matrix where the entry at position (i, j)
+        is 1 if there is an edge between nodes i and j, and 0 otherwise.
+        
+        Returns
+        -------
+        sparse.DOK
+            The adjacency matrix as a sparse DOK (Dictionary of Keys) matrix.
         """
         Amatrix = sparse.DOK((len(self.nodes), len(self.nodes)))
         for edge in self.edges:
@@ -80,8 +125,15 @@ class GraphResistanceDistance:
         
     def computeResistanceDistance(self):
         """
-
-        :return:
+        Compute the resistance distance matrix for the graph.
+        
+        This method calculates the resistance distance between all pairs of nodes
+        using the Moore-Penrose pseudoinverse of the Laplacian matrix.
+        
+        Returns
+        -------
+        sparse.DOK
+            The resistance distance matrix as a sparse DOK matrix.
         """
         Dmatrix = self.calculateDegreeMatrix()
         Amatrix = self.calculateAdjacencyMatrix()
