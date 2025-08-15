@@ -1,6 +1,6 @@
 Cython>=1.0.0
-numpy==2.3.2
-networkx==3.5
-sparse==0.16.0
+numpy>=1.26.4
+networkx>=3.5
+sparse>=0.13.0
 sphinx>=4.0.0
 sphinx-rtd-theme>=1.0.0
