@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 1
 
    intro
+   api
    news
 
 Indices and tables
