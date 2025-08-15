@@ -1,4 +1,4 @@
-Cython==2.2.6
+Cython>=1.0.0
 numpy==2.3.2
 networkx==3.5
 sparse==0.16.0
