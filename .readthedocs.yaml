@@ -25,3 +25,5 @@ formats: all
 python:
   install:
     - requirements: doc/requirements.txt
+    - method: setuptools
+      path: .
