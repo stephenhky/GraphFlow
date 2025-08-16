@@ -26,8 +26,13 @@ News
 What's New
 ----------
 
+Release 0.6.3  (Apr 1, 2025)
+----------------------------
+
+* Package requirements updated.
+
 Release 0.6.2 (December 2, 2024)
------------------------------
+--------------------------------
 
 * Package distribution using `pyproject.toml`.
 
