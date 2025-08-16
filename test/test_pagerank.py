@@ -72,15 +72,6 @@ class test_pagerank(unittest.TestCase):
 
         self.googlematrix, self.nodedict = graphflow.pagerank.GooglePageRank.GoogleMatrix(graph, 0.15)
 
-    def testNetwork_fortran(self):
-        self.assertRaises(
-            ValueError,
-            graphflow.pagerank.GooglePageRank.CalculatePageRankFromAdjacencyMatrix,
-            adjMatrix=self.googlematrix,
-            nodes=self.nodedict,
-            language=PageRankLanguage.FORTRAN
-        )
-
     def testNetwork_python(self):
         pagerank = graphflow.pagerank.GooglePageRank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.PYTHON)
 

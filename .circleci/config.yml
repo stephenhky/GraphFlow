@@ -29,11 +29,6 @@ shared: &shared
 
 jobs:
 
-  py38:
-    <<: *shared
-    docker:
-      - image: cimg/python:3.8
-
   py39:
     <<: *shared
     docker:
@@ -54,12 +49,17 @@ jobs:
     docker:
       - image: cimg/python:3.12
 
+  py313:
+    <<: *shared
+    docker:
+      - image: cimg/python:3.13
+
 workflows:
   version: 2
   build:
     jobs:
-      - py38
       - py39
       - py310
       - py311
       - py312
+      - py313

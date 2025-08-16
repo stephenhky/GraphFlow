@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "graphflow"
-version = "0.6.3"
+version = "0.7.0"
 authors = [
     {name = "Kwan Yuet Stephen Ho", email = "stephenhky@yahoo.com.hk"}
 ]
@@ -12,21 +12,21 @@ description = "Algorithms for Graph Flow Analysis"
 readme = {file = "README.md", content-type = "text/markdown"}
 license = {text = "MIT"}
 keywords = ["network", "graph"]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 classifiers=[
       "Topic :: Scientific/Engineering :: Artificial Intelligence",
       "Topic :: Scientific/Engineering :: Mathematics",
       "Topic :: Software Development :: Libraries :: Python Modules",
-      "Programming Language :: Python :: 3.8",
       "Programming Language :: Python :: 3.9",
       "Programming Language :: Python :: 3.10",
       "Programming Language :: Python :: 3.11",
       "Programming Language :: Python :: 3.12",
+      "Programming Language :: Python :: 3.13",
       "Programming Language :: Cython",
       "Programming Language :: C",
       "License :: OSI Approved :: MIT License",
 ]
-dependencies = ["Cython>=0.29.0", "numpy>=1.20.0", "networkx>=3.0", "sparse>=0.10.0"]
+dependencies = ["Cython>=0.29.0", "numpy>=1.20.0", "networkx>=3.0", "sparse>=0.10.0", "nptyping"]
 
 [project.urls]
 Repository = "https://github.com/stephenhky/GraphFlow"
@@ -40,6 +40,7 @@ packages = [
     "graphflow.hits"
 ]
 zip-safe = false
+package-dir = {"" = "src"}
 
 [project.optional-dependencies]
 test = ["unittest2", "pytest", "pytest-cython", "pandas", "scipy"]

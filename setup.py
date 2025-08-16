@@ -4,7 +4,7 @@ import numpy as np
 from Cython.Build import cythonize
 
 
-dynprog_ext_modules = cythonize(['graphflow/pagerank/cpagerank.pyx'])
+dynprog_ext_modules = cythonize(['src/graphflow/pagerank/cpagerank.pyx'])
 
 
 setup(
