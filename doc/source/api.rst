@@ -4,22 +4,19 @@ API
 PageRank
 --------
 
-.. automodule:: graphflow.pagerank.GooglePageRank
+.. automodule:: graphflow.pagerank
    :members:
 
 
 Resistance
 ----------
 
-.. automodule:: graphflow.simvoltage.resistancedist
-   :members:
-
-.. automodule:: graphflow.simvoltage.SocialNetworkSimVoltage
+.. automodule:: graphflow.simvoltage
    :members:
 
 
 HITS (Hyperlink-Induced Topic Search)
 -------------------------------------
 
-.. automodule:: graphflow.hits.hitsrank
+.. automodule:: graphflow.hits
    :members:
