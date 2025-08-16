@@ -62,8 +62,7 @@ extensions = [
 ]
 
 # Mock imports for modules that are not available in readthedocs environment
-autodoc_mock_imports = ['cpagerank']
-autodoc_mock_imports = ['cpagerank', 'sparse', 'nptyping']
+autodoc_mock_imports = ['graphflow.pagerank.cpagerank', 'sparse', 'nptyping']
 templates_path = ['_templates']
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
