@@ -1,6 +1,7 @@
 News
 ====
 
+* 08/15/2025: `graphflow` 0.7.0 released.
 * 04/01/2025: `graphflow` 0.6.3 released.
 * 12/02/2024: `graphflow` 0.6.2 released.
 * 07/21/2023: `graphflow` 0.6.1 released.
@@ -28,6 +29,20 @@ What's New
 
 Release 0.6.3  (Apr 1, 2025)
 ----------------------------
+
+* Package requirements updated.
+
+Release 0.6.2 (December 2, 2024)
+--------------------------------
+Release 0.7.0 (August 15, 2025)
+-------------------------------
+
+* Update of documentation;
+* Usage of `src/`;
+* Adoption of Github workflows.
+
+Release 0.6.3 (April 1, 2025)
+-----------------------------
 
 * Package requirements updated.
 
