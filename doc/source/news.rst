@@ -1,7 +1,7 @@
 News
 ====
 
-* 08/15/2025: `graphflow` 0.7.0 released.
+* 08/16/2025: `graphflow` 0.7.0 released.
 * 04/01/2025: `graphflow` 0.6.3 released.
 * 12/02/2024: `graphflow` 0.6.2 released.
 * 07/21/2023: `graphflow` 0.6.1 released.
@@ -27,7 +27,7 @@ News
 What's New
 ----------
 
-Release 0.7.0 (August 15, 2025)
+Release 0.7.0 (August 16, 2025)
 -------------------------------
 
 * Update of documentation;
