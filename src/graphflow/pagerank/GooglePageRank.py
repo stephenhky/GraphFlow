@@ -1,10 +1,10 @@
 
 import warnings
-from typing import Tuple
+from typing import Annotated, Literal
 
 import networkx
 import numpy as np
-from nptyping import NDArray, Shape, Float
+from numpy.typing import NDArray
 
 from .cpagerank import pagerank_cython
 from .. import L1norm, PageRankLanguage
@@ -13,7 +13,7 @@ from .. import L1norm, PageRankLanguage
 def GoogleMatrix(
         digraph: networkx.DiGraph,
         beta: float
-) -> Tuple[NDArray[Shape["*, *"], Float], dict[str, int]]:
+) -> tuple[Annotated[NDArray[np.float64], Literal["1D Array"]], dict[str, int]]:
     """
     Compute the Google Matrix for a directed graph.
     
@@ -43,7 +43,7 @@ def GoogleMatrix(
 
 
 def CalculatePageRankFromAdjacencyMatrix_Cython(
-        adjMatrix: NDArray[Shape["*, *"], Float],
+        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
         nodes: dict[str, int],
         eps: float=1e-4,
         maxstep: int=1000
@@ -52,7 +52,7 @@ def CalculatePageRankFromAdjacencyMatrix_Cython(
 
 
 def CalculatePageRankFromAdjacencyMatrix_Python(
-        adjMatrix: NDArray[Shape["*, *"], Float],
+        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
         nodes: dict[str, int],
         eps: float=1e-4,
         maxstep: int=1000
@@ -95,7 +95,7 @@ def CalculatePageRankFromAdjacencyMatrix_Python(
 
 
 def CalculatePageRankFromAdjacencyMatrix(
-        adjMatrix: NDArray[Shape["*, *"], Float],
+        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
         nodes: dict[str, int],
         eps: float=1e-4,
         maxstep: int=1000,
