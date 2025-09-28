@@ -26,7 +26,7 @@ classifiers=[
       "Programming Language :: C",
       "License :: OSI Approved :: MIT License",
 ]
-dependencies = ["Cython>=0.29.0", "numpy>=1.20.0", "networkx>=3.0", "sparse>=0.10.0", "nptyping"]
+dependencies = ["Cython>=0.29.0", "numpy>=1.20.0", "networkx>=3.0", "sparse>=0.10.0"]
 
 [project.urls]
 Repository = "https://github.com/stephenhky/GraphFlow"

@@ -5,6 +5,8 @@ Get the resistance distance matrix of a simple undirected network.
 See: http://en.wikipedia.org/wiki/Resistance_distance
 '''
 
+from typing import Optional
+
 import numpy as np
 import sparse
 
@@ -27,7 +29,7 @@ class GraphResistanceDistance:
     
     See: http://en.wikipedia.org/wiki/Resistance_distance
     """
-    def __init__(self, nodes: list[str]=None, edges: list[tuple[str, str]]=None):
+    def __init__(self, nodes: list[str]=None, edges: Optional[list[tuple[str, str]]]=None):
         """
         Initialize the GraphResistanceDistance class.
         
