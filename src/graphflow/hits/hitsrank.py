@@ -12,7 +12,7 @@ from .. import L1norm
 
 
 def hits(
-        adjMatrix: NDArray[Shape["*, *"], Float],
+        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
         eps: float=1e-4,
         maxstep: int=1000
 ) -> tuple[Annotated[NDArray[np.float64], Literal["1D Array"]], Annotated[NDArray[np.float64], Literal["1D Array"]]]:
