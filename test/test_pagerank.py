@@ -80,14 +80,6 @@ class test_pagerank(unittest.TestCase):
         for name in pagerank:
             self.assertAlmostEqual(pagerank[name], pagerank_answer[name], places=5)
 
-    def testNetwork_cython(self):
-        pagerank = graphflow.pagerank.GooglePageRank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.CYTHON)
-
-        self.assertEqual(len(pagerank), len(pagerank_answer))
-        self.assertEqual(len(set(pagerank.keys()).intersection(set(pagerank_answer.keys()))), len(pagerank))
-        for name in pagerank:
-            self.assertAlmostEqual(pagerank[name], pagerank_answer[name], places=5)
-
 
 
 if __name__ == '__main__':

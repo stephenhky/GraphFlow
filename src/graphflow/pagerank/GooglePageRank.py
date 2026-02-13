@@ -1,12 +1,10 @@
 
-import warnings
 from typing import Annotated, Literal
 
 import networkx
 import numpy as np
 from numpy.typing import NDArray
 
-from .cpagerank import pagerank_cython
 from .. import L1norm, PageRankLanguage
 
 
@@ -40,15 +38,6 @@ def GoogleMatrix(
     for node1, node2 in digraph.edges():
         A[nodedict[node2], nodedict[node1]] += beta / float(len(list(digraph.successors(node1))))
     return A, nodedict
-
-
-def CalculatePageRankFromAdjacencyMatrix_Cython(
-        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
-        nodes: dict[str, int],
-        eps: float=1e-4,
-        maxstep: int=1000
-):
-    return pagerank_cython(adjMatrix, nodes, eps, maxstep)
 
 
 def CalculatePageRankFromAdjacencyMatrix_Python(
@@ -99,7 +88,7 @@ def CalculatePageRankFromAdjacencyMatrix(
         nodes: dict[str, int],
         eps: float=1e-4,
         maxstep: int=1000,
-        language: PageRankLanguage=PageRankLanguage.CYTHON
+        language: PageRankLanguage=PageRankLanguage.PYTHON
 ) -> dict[str, float]:
     """
     Calculate PageRank from an adjacency matrix using specified implementation language.
@@ -120,7 +109,7 @@ def CalculatePageRankFromAdjacencyMatrix(
     maxstep : int, optional
         The maximum number of iterations to perform. Default is 1000.
     language : PageRankLanguage, optional
-        The implementation language to use. Default is PageRankLanguage.CYTHON.
+        The implementation language to use. Default is PageRankLanguage.PYTHON.
     
     Returns
     -------
@@ -128,10 +117,10 @@ def CalculatePageRankFromAdjacencyMatrix(
         A dictionary mapping node identifiers to their PageRank scores.
     
     """
-    if language == PageRankLanguage.CYTHON:
-        return CalculatePageRankFromAdjacencyMatrix_Cython(adjMatrix, nodes, eps=eps, maxstep=maxstep)
-    else:
+    if language == PageRankLanguage.PYTHON:
         return CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=eps, maxstep=maxstep)
+    else:
+        raise ValueError("Only Python implemented.")
 
 
 def CalculatePageRank(
