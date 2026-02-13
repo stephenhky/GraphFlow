@@ -44,4 +44,4 @@ zip-safe = false
 package-dir = {"" = "src"}
 
 [project.optional-dependencies]
-test = ["unittest2", "pytest", "pytest-cython", "pandas", "scipy"]
+test = ["unittest2", "pytest", "pandas", "scipy"]
