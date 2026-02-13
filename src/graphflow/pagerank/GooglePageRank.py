@@ -54,7 +54,7 @@ def _calculate_pagerank_matrix(
     converged = False
     stepid = 0
     while not converged and stepid < maxstep:
-        newr = np.matmul(adjMatrix, r)
+        newr = adjMatrix @ r
         converged = (L1norm(newr, r) < eps)
         r = newr
         stepid += 1
