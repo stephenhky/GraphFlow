@@ -41,7 +41,7 @@ def GoogleMatrix(
     return A, nodedict
 
 
-@nb.njit
+@nb.jit
 def CalculatePageRankFromAdjacencyMatrix_Python(
         adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
         nodes: dict[str, int],
