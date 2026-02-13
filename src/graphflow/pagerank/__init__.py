@@ -1,2 +1,2 @@
-from .GooglePageRank import GoogleMatrix, CalculatePageRankFromAdjacencyMatrix_Cython, \
+from .GooglePageRank import GoogleMatrix, \
     CalculatePageRankFromAdjacencyMatrix_Python, CalculatePageRankFromAdjacencyMatrix, CalculatePageRank

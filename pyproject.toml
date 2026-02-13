@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools", "wheel", "Cython>=0.29.0", "numpy >= 1.20.0"]
+requires = ["setuptools", "wheel", "numpy >= 1.20.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "graphflow"
-version = "0.7.1"
+version = "0.8.0"
 authors = [
     {name = "Kwan Yuet Stephen Ho", email = "stephenhky@yahoo.com.hk"}
 ]
@@ -22,11 +22,9 @@ classifiers=[
       "Programming Language :: Python :: 3.11",
       "Programming Language :: Python :: 3.12",
       "Programming Language :: Python :: 3.13",
-      "Programming Language :: Cython",
-      "Programming Language :: C",
       "License :: OSI Approved :: MIT License",
 ]
-dependencies = ["Cython>=0.29.0", "numpy>=1.20.0", "networkx>=3.0", "sparse>=0.10.0"]
+dependencies = ["numpy>=1.20.0", "networkx>=3.0", "sparse>=0.10.0", "numba"]
 
 [project.urls]
 Repository = "https://github.com/stephenhky/GraphFlow"
@@ -44,4 +42,4 @@ zip-safe = false
 package-dir = {"" = "src"}
 
 [project.optional-dependencies]
-test = ["unittest2", "pytest", "pytest-cython", "pandas", "scipy"]
+test = ["unittest2", "pytest", "pandas", "scipy"]

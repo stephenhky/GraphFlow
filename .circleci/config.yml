@@ -18,13 +18,12 @@ shared: &shared
         command: |
           pip install --upgrade --user pip
           pip install --upgrade --user .
-          CC=gcc python setup.py build_ext --inplace
 
     - run:
         name: Run Unit Tests
         command: |
           pip install --upgrade --user .[test]
-          pytest --doctest-cython
+          pytest
 
 
 jobs:

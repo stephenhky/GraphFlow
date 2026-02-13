@@ -1,5 +1,2 @@
 include README.md
-include requirements.txt
 include pyproject.toml
-include src/graphflow/pagerank/cpagerank.pyx
-include src/graphflow/pagerank/cpagerank.c

@@ -1,13 +1,12 @@
 
-import warnings
 from typing import Annotated, Literal
 
 import networkx
 import numpy as np
 from numpy.typing import NDArray
+import numba as nb
 
-from .cpagerank import pagerank_cython
-from .. import L1norm, PageRankLanguage
+from .. import PageRankLanguage
 
 
 def GoogleMatrix(
@@ -42,13 +41,24 @@ def GoogleMatrix(
     return A, nodedict
 
 
-def CalculatePageRankFromAdjacencyMatrix_Cython(
+@nb.njit(nb.float64[:, :](nb.float64[:, :], nb.float64, nb.int64))
+def _calculate_pagerank_matrix(
         adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
-        nodes: dict[str, int],
         eps: float=1e-4,
         maxstep: int=1000
-):
-    return pagerank_cython(adjMatrix, nodes, eps, maxstep)
+) -> Annotated[NDArray[np.float64], Literal["1D Array"]]:
+    nbnodes = adjMatrix.shape[0]
+    r = np.empty((nbnodes, 1))
+    for i in range(nbnodes):
+        r[i, 0] = 1 / nbnodes
+    converged = False
+    stepid = 0
+    while not converged and stepid < maxstep:
+        newr = adjMatrix @ r
+        converged = (np.sum(np.abs(newr - r)) < eps)   # L1norm
+        r = newr
+        stepid += 1
+    return r
 
 
 def CalculatePageRankFromAdjacencyMatrix_Python(
@@ -81,15 +91,7 @@ def CalculatePageRankFromAdjacencyMatrix_Python(
     dict
         A dictionary mapping node identifiers to their PageRank scores.
     """
-    nbnodes = adjMatrix.shape[0]
-    r = np.transpose([np.repeat(1 / float(nbnodes), nbnodes)])
-    converged = False
-    stepid = 0
-    while not converged and stepid < maxstep:
-        newr = np.matmul(adjMatrix, r)
-        converged = (L1norm(newr, r) < eps)
-        r = newr
-        stepid += 1
+    r = _calculate_pagerank_matrix(adjMatrix, eps, maxstep)
     nodepr = {node: r[nodes[node], 0] for node in nodes}
     return nodepr
 
@@ -99,7 +101,7 @@ def CalculatePageRankFromAdjacencyMatrix(
         nodes: dict[str, int],
         eps: float=1e-4,
         maxstep: int=1000,
-        language: PageRankLanguage=PageRankLanguage.CYTHON
+        language: PageRankLanguage=PageRankLanguage.PYTHON
 ) -> dict[str, float]:
     """
     Calculate PageRank from an adjacency matrix using specified implementation language.
@@ -120,7 +122,7 @@ def CalculatePageRankFromAdjacencyMatrix(
     maxstep : int, optional
         The maximum number of iterations to perform. Default is 1000.
     language : PageRankLanguage, optional
-        The implementation language to use. Default is PageRankLanguage.CYTHON.
+        The implementation language to use. Default is PageRankLanguage.PYTHON.
     
     Returns
     -------
@@ -128,10 +130,10 @@ def CalculatePageRankFromAdjacencyMatrix(
         A dictionary mapping node identifiers to their PageRank scores.
     
     """
-    if language == PageRankLanguage.CYTHON:
-        return CalculatePageRankFromAdjacencyMatrix_Cython(adjMatrix, nodes, eps=eps, maxstep=maxstep)
-    else:
+    if language == PageRankLanguage.PYTHON:
         return CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=eps, maxstep=maxstep)
+    else:
+        raise ValueError("Only Python implemented.")
 
 
 def CalculatePageRank(
