@@ -4,6 +4,7 @@ from typing import Annotated, Literal
 import networkx
 import numpy as np
 from numpy.typing import NDArray
+import numba as nb
 
 from .. import L1norm, PageRankLanguage
 
@@ -40,6 +41,7 @@ def GoogleMatrix(
     return A, nodedict
 
 
+@nb.njit
 def CalculatePageRankFromAdjacencyMatrix_Python(
         adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
         nodes: dict[str, int],
