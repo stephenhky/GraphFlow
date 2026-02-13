@@ -41,7 +41,7 @@ def GoogleMatrix(
     return A, nodedict
 
 
-@nb.njit(nb.float64[:](nb.float64[:, :], float, int))
+@nb.njit(nb.float64[:](nb.float64[:, :], nb.float64, np.int64))
 def _calculate_pagerank_matrix(
         adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
         eps: float=1e-4,
