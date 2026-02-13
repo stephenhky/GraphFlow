@@ -6,7 +6,7 @@ import numpy as np
 from numpy.typing import NDArray
 import numba as nb
 
-from .. import L1norm, PageRankLanguage
+from .. import PageRankLanguage
 
 
 def GoogleMatrix(
@@ -55,7 +55,7 @@ def _calculate_pagerank_matrix(
     stepid = 0
     while not converged and stepid < maxstep:
         newr = adjMatrix @ r
-        converged = (L1norm(newr, r) < eps)
+        converged = (np.sum(np.abs(newr - r)) < eps)   # L1norm
         r = newr
         stepid += 1
     return r
