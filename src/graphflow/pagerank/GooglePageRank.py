@@ -48,7 +48,7 @@ def _calculate_pagerank_matrix(
         maxstep: int=1000
 ) -> Annotated[NDArray[np.float64], Literal["1D Array"]]:
     nbnodes = adjMatrix.shape[0]
-    r = np.transpose([np.repeat(1 / nbnodes, nbnodes)])
+    r = np.transpose(np.array([np.repeat(1 / nbnodes, nbnodes)]))
     converged = False
     stepid = 0
     while not converged and stepid < maxstep:
