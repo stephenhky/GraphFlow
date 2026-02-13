@@ -41,7 +41,24 @@ def GoogleMatrix(
     return A, nodedict
 
 
-@nb.jit
+@nb.njit(nb.float64[:](nb.float64[:, :], float, int))
+def _calculate_pagerank_matrix(
+        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
+        eps: float=1e-4,
+        maxstep: int=1000
+) -> Annotated[NDArray[np.float64], Literal["1D Array"]]:
+    nbnodes = adjMatrix.shape[0]
+    r = np.transpose([np.repeat(1 / float(nbnodes), nbnodes)])
+    converged = False
+    stepid = 0
+    while not converged and stepid < maxstep:
+        newr = np.matmul(adjMatrix, r)
+        converged = (L1norm(newr, r) < eps)
+        r = newr
+        stepid += 1
+    return r
+
+
 def CalculatePageRankFromAdjacencyMatrix_Python(
         adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
         nodes: dict[str, int],
@@ -72,15 +89,7 @@ def CalculatePageRankFromAdjacencyMatrix_Python(
     dict
         A dictionary mapping node identifiers to their PageRank scores.
     """
-    nbnodes = adjMatrix.shape[0]
-    r = np.transpose([np.repeat(1 / float(nbnodes), nbnodes)])
-    converged = False
-    stepid = 0
-    while not converged and stepid < maxstep:
-        newr = np.matmul(adjMatrix, r)
-        converged = (L1norm(newr, r) < eps)
-        r = newr
-        stepid += 1
+    r = _calculate_pagerank_matrix(adjMatrix, eps, maxstep)
     nodepr = {node: r[nodes[node], 0] for node in nodes}
     return nodepr
 
