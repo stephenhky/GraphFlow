@@ -4,7 +4,7 @@ API
 PageRank
 --------
 
-.. automodule:: graphflow.pagerank.GooglePageRank
+.. automodule:: graphflow.pagerank.googlepagerank
    :members:
 
 
@@ -14,7 +14,7 @@ Resistance
 .. automodule:: graphflow.simvoltage.resistancedist
    :members:
 
-.. automodule:: graphflow.simvoltage.SocialNetworkSimVoltage
+.. automodule:: graphflow.simvoltage.socialnetwork
    :members:
 
 

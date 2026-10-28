@@ -1,3 +1,3 @@
 
 from .resistancedist import GraphResistanceDistance
-from .SocialNetworkSimVoltage import SocialNetworkSimVoltage
+from .socialnetwork import SocialNetworkSimVoltage

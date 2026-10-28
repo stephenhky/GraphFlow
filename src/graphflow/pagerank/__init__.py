@@ -1,2 +1,2 @@
 
-from .GooglePageRank import compute_google_matrix, calculate_page_rank_from_adjacency_matrix, calculate_page_rank
+from .googlepagerank import compute_google_matrix, calculate_page_rank_from_adjacency_matrix, calculate_page_rank
