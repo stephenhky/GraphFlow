@@ -5,7 +5,7 @@ from graphflow.hits import calculate_hits
 import pytest
 
 
-def test_fork(self):
+def test_fork():
     forkgr = nx.DiGraph()
     forkgr.add_nodes_from(['a', 'b', 'c'])
     forkgr.add_edges_from([('a', 'b'), ('c', 'b')])
