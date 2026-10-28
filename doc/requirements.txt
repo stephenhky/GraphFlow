@@ -1,6 +1,6 @@
 numpy==2.5.4
 networkx==3.7
-sparse
+sparse==0.19.3
 numpydantic==1.10.0
 scipy
 sphinx
