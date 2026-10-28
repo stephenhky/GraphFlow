@@ -3,5 +3,5 @@ networkx
 sparse
 numpydantic==1.10.0
 scipy
-sphinx
+sphinx==9.2.0
 sphinx-rtd-theme
