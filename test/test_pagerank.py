@@ -1,6 +1,6 @@
 
 import networkx as nx
-from graphflow.pagerank.GooglePageRank import compute_google_matrix, calculate_page_rank_from_adjacency_matrix
+from graphflow.pagerank import compute_google_matrix, calculate_page_rank_from_adjacency_matrix
 import pytest
 
 
