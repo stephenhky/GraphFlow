@@ -1,6 +1,6 @@
 numpy
 networkx
-sparse
+sparse==0.19.3
 numpydantic==1.10.0
 scipy
 sphinx
