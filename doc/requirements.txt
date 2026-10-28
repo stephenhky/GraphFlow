@@ -1,7 +1,7 @@
-numpy
-networkx
-sparse
+numpy==2.5.4
+networkx==3.7
+sparse==0.19.3
 numpydantic==1.10.0
-scipy
-sphinx
+scipy==1.18.1
+sphinx==9.2.0
 sphinx-rtd-theme==3.1.0
