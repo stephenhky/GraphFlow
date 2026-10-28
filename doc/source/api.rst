@@ -6,7 +6,6 @@ PageRank
 
 .. automodule:: graphflow.pagerank.GooglePageRank
    :members:
-   :exclude-members: CalculatePageRankFromAdjacencyMatrix_Cython
 
 
 Resistance
