@@ -1,5 +1,5 @@
 numpy==2.5.4
-networkx
+networkx==3.7
 sparse
 numpydantic==1.10.0
 scipy
