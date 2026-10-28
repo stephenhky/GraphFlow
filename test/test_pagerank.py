@@ -72,7 +72,7 @@ def test_network():
 
     pagerank = calculate_page_rank_from_adjacency_matrix(googlematrix, nodedict)
 
-    assert len(pagerank) == len(pagerank_answer))
+    assert len(pagerank) == len(pagerank_answer)
     assert len(set(pagerank.keys()).intersection(set(pagerank_answer.keys()))) == len(pagerank)
     for name in pagerank:
         assert pagerank[name] ==pytest.approx(pagerank_answer[name], abs=1e-5)
