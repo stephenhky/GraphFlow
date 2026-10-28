@@ -1,2 +1,2 @@
 
-from .hitsrank import hits, CalculateHITS
+from .hitsrank import hits, calculate_hits

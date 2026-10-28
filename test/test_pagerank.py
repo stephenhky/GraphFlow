@@ -1,16 +1,15 @@
 
-import unittest
-
 import networkx as nx
-import graphflow
-import graphflow.pagerank.GooglePageRank
-from graphflow import PageRankLanguage
+from graphflow.pagerank.GooglePageRank import compute_google_matrix, calculate_page_rank_from_adjacency_matrix
+import pytest
+
 
 nodes = ['Stephen', 'John', 'Mary',
          'Joshua',
          'Abigail', 'Andrew', 'Jacob', 'Melanie',
          'Shirley', 'Zoe', 'Wallace', 'Susan',
          'Urban']
+
 edges = [('Stephen', 'Jacob', 1),
          ('Jacob', 'Stephen', 1),
          ('Stephen', 'Abigail', 1),
@@ -64,23 +63,16 @@ pagerank_answer = {'Stephen': 0.08467827,
                    'Urban': 0.06867991}
 
 
-class test_pagerank(unittest.TestCase):
-    def setUp(self):
-        graph = nx.DiGraph()
-        graph.add_nodes_from(nodes)
-        graph.add_weighted_edges_from(edges)
+def test_network():
+    graph = nx.DiGraph()
+    graph.add_nodes_from(nodes)
+    graph.add_weighted_edges_from(edges)
 
-        self.googlematrix, self.nodedict = graphflow.pagerank.GooglePageRank.GoogleMatrix(graph, 0.15)
+    googlematrix, nodedict = compute_google_matrix(graph, 0.15)
 
-    def testNetwork_python(self):
-        pagerank = graphflow.pagerank.GooglePageRank.CalculatePageRankFromAdjacencyMatrix(self.googlematrix, self.nodedict, language=PageRankLanguage.PYTHON)
+    pagerank = calculate_page_rank_from_adjacency_matrix(googlematrix, nodedict)
 
-        self.assertEqual(len(pagerank), len(pagerank_answer))
-        self.assertEqual(len(set(pagerank.keys()).intersection(set(pagerank_answer.keys()))), len(pagerank))
-        for name in pagerank:
-            self.assertAlmostEqual(pagerank[name], pagerank_answer[name], places=5)
-
-
-
-if __name__ == '__main__':
-    unittest.main()
+    assert len(pagerank) == len(pagerank_answer))
+    assert len(set(pagerank.keys()).intersection(set(pagerank_answer.keys()))) == len(pagerank)
+    for name in pagerank:
+        assert pagerank[name] ==pytest.approx(pagerank_answer[name], abs=1e-5)

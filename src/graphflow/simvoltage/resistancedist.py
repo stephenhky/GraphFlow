@@ -29,7 +29,11 @@ class GraphResistanceDistance:
     
     See: http://en.wikipedia.org/wiki/Resistance_distance
     """
-    def __init__(self, nodes: list[str]=None, edges: Optional[list[tuple[str, str]]]=None):
+    def __init__(
+            self,
+            nodes: Optional[list[str]] = None,
+            edges: Optional[list[tuple[str, str]]] = None
+    ):
         """
         Initialize the GraphResistanceDistance class.
         
@@ -46,8 +50,8 @@ class GraphResistanceDistance:
         if edges is None:
             edges = DEFAULT_EDGES
 
-        self.initializeClass(nodes, edges)
-        self.Omega = self.computeResistanceDistance()
+        self._initialize_class(nodes, edges)
+        self.Omega = self.compute_resistance_distance()
         
     def getResistance(self, node1: str, node2: str) -> float:
         """
@@ -78,7 +82,7 @@ class GraphResistanceDistance:
             unknown_keys = [node for node in [node1, node2] if not node in self.nodesIdx]
             raise UnknownNodeException(unknown_keys)
     
-    def initializeClass(self, nodes: list[str], edges: list[tuple[str, str]]) -> None:
+    def _initialize_class(self, nodes: list[str], edges: list[tuple[str, str]]) -> None:
         """
         Initialize the class with nodes and edges.
         
@@ -94,7 +98,7 @@ class GraphResistanceDistance:
         self.edges = list(set([tuple(sorted(edge)) for edge in edges]))
         self.nodesIdx = {self.nodes[idx]: idx for idx in range(len(self.nodes))}
 
-    def calculateDegreeMatrix(self) -> sparse.SparseArray:
+    def _calculate_degree_matrix(self) -> sparse.SparseArray:
         """
         Calculate the degree matrix of the graph.
         
@@ -113,7 +117,7 @@ class GraphResistanceDistance:
                 Dmatrix[idx, idx] += 1
         return Dmatrix
         
-    def calculateAdjacencyMatrix(self) -> sparse.SparseArray:
+    def _calculate_adjacency_matrix(self) -> sparse.SparseArray:
         """
         Calculate the adjacency matrix of the graph.
         
@@ -133,7 +137,7 @@ class GraphResistanceDistance:
             Amatrix[idx1, idx0] = 1
         return Amatrix
         
-    def computeResistanceDistance(self) -> sparse.SparseArray:
+    def compute_resistance_distance(self) -> sparse.SparseArray:
         """
         Compute the resistance distance matrix for the graph.
         
@@ -145,8 +149,8 @@ class GraphResistanceDistance:
         sparse.SparseArray
             The resistance distance matrix as a sparse DOK matrix.
         """
-        Dmatrix = self.calculateDegreeMatrix()
-        Amatrix = self.calculateAdjacencyMatrix()
+        Dmatrix = self._calculate_degree_matrix()
+        Amatrix = self._calculate_adjacency_matrix()
         Lmatrix = Dmatrix - Amatrix
         Lambda = np.linalg.pinv(Lmatrix.todense())
         Omega = sparse.DOK((len(self.nodes), len(self.nodes)))
