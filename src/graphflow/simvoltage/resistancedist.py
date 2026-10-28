@@ -53,7 +53,7 @@ class GraphResistanceDistance:
         self._initialize_class(nodes, edges)
         self.Omega = self.compute_resistance_distance()
         
-    def getResistance(self, node1: str, node2: str) -> float:
+    def get_resistance(self, node1: str, node2: str) -> float:
         """
         Get the resistance distance between two nodes.
         
