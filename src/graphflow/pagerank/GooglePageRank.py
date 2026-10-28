@@ -1,6 +1,4 @@
 
-from typing import Annotated, Literal
-
 import networkx
 import numpy as np
 from numpydantic import NDArray, Shape
@@ -41,10 +39,10 @@ def compute_google_matrix(
 
 @nb.njit(nb.float64[:, :](nb.float64[:, :], nb.float64, nb.int64))
 def _calculate_pagerank_matrix(
-        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
+        adjMatrix: NDArray[Shape["*, *"], float],
         eps: float=1e-4,
         maxstep: int=1000
-) -> Annotated[NDArray[np.float64], Literal["1D Array"]]:
+) -> NDArray[Shape["*"], float]:
     nbnodes = adjMatrix.shape[0]
     r = np.empty((nbnodes, 1))
     for i in range(nbnodes):
