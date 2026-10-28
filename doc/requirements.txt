@@ -1,6 +1,6 @@
 numpy>=1.26.4
 networkx>=3.5
 sparse>=0.13.0
-numpydantic
+numpydantic==1.10.0
 sphinx>=4.0.0
 sphinx-rtd-theme>=1.0.0
