@@ -1,18 +1,14 @@
 
-from typing import Annotated, Literal
-
 import networkx
 import numpy as np
-from numpy.typing import NDArray
+from numpydantic import NDArray, Shape
 import numba as nb
 
-from .. import PageRankLanguage
 
-
-def GoogleMatrix(
+def compute_google_matrix(
         digraph: networkx.DiGraph,
         beta: float
-) -> tuple[Annotated[NDArray[np.float64], Literal["1D Array"]], dict[str, int]]:
+) -> tuple[NDArray[Shape["*"], float], dict[str, int]]:
     """
     Compute the Google Matrix for a directed graph.
     
@@ -43,10 +39,10 @@ def GoogleMatrix(
 
 @nb.njit(nb.float64[:, :](nb.float64[:, :], nb.float64, nb.int64))
 def _calculate_pagerank_matrix(
-        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
+        adjMatrix: NDArray[Shape["*, *"], float],
         eps: float=1e-4,
         maxstep: int=1000
-) -> Annotated[NDArray[np.float64], Literal["1D Array"]]:
+) -> NDArray[Shape["*"], float]:
     nbnodes = adjMatrix.shape[0]
     r = np.empty((nbnodes, 1))
     for i in range(nbnodes):
@@ -61,19 +57,19 @@ def _calculate_pagerank_matrix(
     return r
 
 
-def CalculatePageRankFromAdjacencyMatrix_Python(
-        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
+def calculate_page_rank_from_adjacency_matrix(
+        adjMatrix: NDArray[Shape["*, *"], float],
         nodes: dict[str, int],
-        eps: float=1e-4,
-        maxstep: int=1000
+        eps: float = 1e-4,
+        maxstep: int = 1000
 ) -> dict[str, float]:
     """
     Calculate PageRank from an adjacency matrix using Python implementation.
-    
+
     This function computes the PageRank scores for nodes in a graph represented by
     an adjacency matrix. It uses an iterative approach until convergence or maximum
     steps are reached.
-    
+
     Parameters
     ----------
     adjMatrix : numpy.ndarray
@@ -85,7 +81,7 @@ def CalculatePageRankFromAdjacencyMatrix_Python(
         is less than this value. Default is 1e-4.
     maxstep : int, optional
         The maximum number of iterations to perform. Default is 1000.
-    
+
     Returns
     -------
     dict
@@ -96,47 +92,7 @@ def CalculatePageRankFromAdjacencyMatrix_Python(
     return nodepr
 
 
-def CalculatePageRankFromAdjacencyMatrix(
-        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
-        nodes: dict[str, int],
-        eps: float=1e-4,
-        maxstep: int=1000,
-        language: PageRankLanguage=PageRankLanguage.PYTHON
-) -> dict[str, float]:
-    """
-    Calculate PageRank from an adjacency matrix using specified implementation language.
-    
-    This function computes the PageRank scores for nodes in a graph represented by
-    an adjacency matrix. It can use either Cython or Python implementation based on
-    the language parameter.
-    
-    Parameters
-    ----------
-    adjMatrix : numpy.ndarray
-        The adjacency matrix representing the graph structure.
-    nodes : dict
-        A dictionary mapping node identifiers to their indices.
-    eps : float, optional
-        The convergence threshold. The algorithm stops when the change in vectors
-        is less than this value. Default is 1e-4.
-    maxstep : int, optional
-        The maximum number of iterations to perform. Default is 1000.
-    language : PageRankLanguage, optional
-        The implementation language to use. Default is PageRankLanguage.PYTHON.
-    
-    Returns
-    -------
-    dict
-        A dictionary mapping node identifiers to their PageRank scores.
-    
-    """
-    if language == PageRankLanguage.PYTHON:
-        return CalculatePageRankFromAdjacencyMatrix_Python(adjMatrix, nodes, eps=eps, maxstep=maxstep)
-    else:
-        raise ValueError("Only Python implemented.")
-
-
-def CalculatePageRank(
+def calculate_page_rank(
         digraph: networkx.DiGraph,
         beta: float,
         eps: float=1e-4,
@@ -166,6 +122,6 @@ def CalculatePageRank(
     dict
         A dictionary mapping node identifiers to their PageRank scores.
     """
-    A, nodes = GoogleMatrix(digraph, beta)
-    return CalculatePageRankFromAdjacencyMatrix(A, nodes, eps=eps, maxstep=maxstep)
+    A, nodes = compute_google_matrix(digraph, beta)
+    return calculate_page_rank_from_adjacency_matrix(A, nodes, eps=eps, maxstep=maxstep)
 

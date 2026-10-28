@@ -1,6 +1,9 @@
 News
 ====
 
+* 10/28/2026: `graphflow` 1.0.0 released.
+* 02/13/2026: `graphflow` 0.8.0 released.
+* 09/28/2025: `graphflow` 0.7.1 released.
 * 08/16/2025: `graphflow` 0.7.0 released.
 * 04/01/2025: `graphflow` 0.6.3 released.
 * 12/02/2024: `graphflow` 0.6.2 released.
@@ -26,6 +29,25 @@ News
 
 What's New
 ----------
+
+Release 1.0.0 (October 28, 2026)
+--------------------------------
+
+* Updated CircleCI CI/CD pipeline version;
+* More Pythonic module nomenclature, huge refactoring;
+* Use of `numpydantic` for NumPy arrays type checking;
+* Unit tests updated.
+
+Release 0.8.0 (February 13. 2026)
+---------------------------------
+
+* Remove Cython dependence;
+* Use of `numba` for optimization.
+
+Release 0.7.1 (September 28, 2025)
+----------------------------------
+
+* Remove `nptyping` type hinting.
 
 Release 0.7.0 (August 16, 2025)
 -------------------------------

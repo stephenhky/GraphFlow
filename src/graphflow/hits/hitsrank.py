@@ -1,21 +1,19 @@
 
 # Jon Kleinberg's HITS (Hyperlink-Induced Topic Search) algorithm
 
-from typing import Literal, Annotated
-
 import networkx
 import numpy as np
 import networkx as nx
-from numpy.typing import NDArray
+from numpydantic import NDArray, Shape
 
 from .. import L1norm
 
 
 def hits(
-        adjMatrix: Annotated[NDArray[np.float64], Literal["2D Array"]],
+        adjMatrix: NDArray[Shape["*, *"], float],
         eps: float=1e-4,
         maxstep: int=1000
-) -> tuple[Annotated[NDArray[np.float64], Literal["1D Array"]], Annotated[NDArray[np.float64], Literal["1D Array"]]]:
+) -> tuple[NDArray[Shape["*"], float], NDArray[Shape["*"], float]]:
     """
     Compute the HITS (Hyperlink-Induced Topic Search) algorithm on an adjacency matrix.
     
@@ -62,11 +60,11 @@ def hits(
     return i.reshape(nbnodes), p.reshape(nbnodes)
 
 
-def CalculateHITS(
+def calculate_hits(
         digraph: networkx.DiGraph,
         eps: float=1e-4,
         maxstep: int=1000
-) -> tuple[Annotated[NDArray[np.float64], Literal["1D Array"]], Annotated[NDArray[np.float64], Literal["1D Array"]]]:
+) -> tuple[dict, dict]:
     """
     Compute the HITS (Hyperlink-Induced Topic Search) algorithm on a NetworkX digraph.
     
