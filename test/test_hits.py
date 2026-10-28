@@ -17,4 +17,4 @@ def test_fork():
     assert hubdict['c'] == pytest.approx(np.sqrt(0.5))
     assert authdict['a'] == pytest.approx(0.0)
     assert authdict['b'] == pytest.approx(1.0)
-    assert authdict['c'] ==pytest.approx(0.0)
+    assert authdict['c'] == pytest.approx(0.0)
