@@ -1,4 +1,4 @@
-numpy==2.5.4
+numpy==2.5.5
 networkx==3.7
 sparse==0.19.3
 numpydantic==2.0.0
